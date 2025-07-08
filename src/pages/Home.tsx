@@ -5,65 +5,66 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-dark-900 via-dark-800 to-dark-900 py-20">
+      <section className="relative grunge-bg py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6">
-            <span className="text-white">Bem-vindo à </span>
-            <span className="text-neon-green neon-text">SkateCrew</span>
+          <h1 className="text-6xl md:text-8xl font-black mb-8 font-grunge">
+            <span className="text-white">[</span>
+            <span className="grunge-text distort-text glitch-effect">izquizita</span>
+            <span className="text-white">]</span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
-            A melhor loja de skate da cidade! Aqui você encontra os melhores shapes, 
-            rodas, trucks e acessórios para elevar seu skate ao próximo nível.
+          <p className="text-lg md:text-xl text-gray-300 mb-12 max-w-3xl mx-auto font-grunge uppercase tracking-wider leading-relaxed">
+            AUTHENTIC STREETWEAR CULTURE ◾ RAW SKATE VIBES ◾ 
+            UNDERGROUND BRANDS ◾ NO FAKE SHIT ◾ REAL STREET CULTURE
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link
               to="/produtos"
-              className="bg-neon-green text-black px-8 py-3 rounded-lg font-semibold text-lg hover:bg-white hover:shadow-lg transition-all duration-300 hover:scale-105"
+              className="bg-grunge-orange text-black px-8 py-4 font-black font-grunge text-lg hover:bg-white hover:shadow-lg transition-all duration-300 hover:scale-105 border-2 border-grunge-orange uppercase tracking-widest"
             >
-              Ver Produtos
+              [SHOP NOW]
             </Link>
             
             <Link
               to="/sobre"
-              className="border-2 border-neon-green text-neon-green px-8 py-3 rounded-lg font-semibold text-lg hover:bg-neon-green hover:text-black transition-all duration-300"
+              className="border-2 border-grunge-orange text-grunge-orange px-8 py-4 font-black font-grunge text-lg hover:bg-grunge-orange hover:text-black transition-all duration-300 uppercase tracking-widest"
             >
-              Nossa História
+              [OUR STORY]
             </Link>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-16 bg-dark-800">
+      <section className="py-20 bg-dark-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-12">
-            Por que escolher a <span className="text-neon-green">SkateCrew</span>?
+          <h2 className="text-4xl md:text-5xl font-black text-center text-white mb-16 font-grunge uppercase tracking-wider">
+            Why <span className="text-grunge-orange">[izquizita]</span>?
           </h2>
           
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center p-6 bg-dark-700 rounded-lg hover:bg-dark-600 transition-colors duration-300">
-              <div className="text-4xl mb-4">🛹</div>
-              <h3 className="text-xl font-semibold text-white mb-3">Produtos de Qualidade</h3>
-              <p className="text-gray-400">
-                Trabalhamos apenas com as melhores marcas do mercado skatista
+            <div className="text-center p-8 streetwear-card hover:bg-dark-700 transition-all duration-300 relative">
+              <div className="text-5xl mb-6 text-grunge-orange">◾</div>
+              <h3 className="text-xl font-black text-white mb-4 font-grunge uppercase tracking-wider">[AUTHENTIC GEAR]</h3>
+              <p className="text-gray-400 font-grunge text-sm uppercase tracking-wide leading-relaxed">
+                NO BULLSHIT BRANDS /// REAL STREET CULTURE /// TESTED BY LOCALS
               </p>
             </div>
             
-            <div className="text-center p-6 bg-dark-700 rounded-lg hover:bg-dark-600 transition-colors duration-300">
-              <div className="text-4xl mb-4">⚡</div>
-              <h3 className="text-xl font-semibold text-white mb-3">Entrega Rápida</h3>
-              <p className="text-gray-400">
-                Receba seus produtos em casa com agilidade e segurança
+            <div className="text-center p-8 streetwear-card hover:bg-dark-700 transition-all duration-300 relative">
+              <div className="text-5xl mb-6 text-grunge-orange">◾</div>
+              <h3 className="text-xl font-black text-white mb-4 font-grunge uppercase tracking-wider">[FAST DELIVERY]</h3>
+              <p className="text-gray-400 font-grunge text-sm uppercase tracking-wide leading-relaxed">
+                QUICK SHIPPING /// SAFE PACKAGING /// STRAIGHT TO YOUR DOOR
               </p>
             </div>
             
-            <div className="text-center p-6 bg-dark-700 rounded-lg hover:bg-dark-600 transition-colors duration-300">
-              <div className="text-4xl mb-4">🤝</div>
-              <h3 className="text-xl font-semibold text-white mb-3">Suporte Especializado</h3>
-              <p className="text-gray-400">
-                Nossa equipe de skatistas está aqui para te ajudar
+            <div className="text-center p-8 streetwear-card hover:bg-dark-700 transition-all duration-300 relative">
+              <div className="text-5xl mb-6 text-grunge-orange">◾</div>
+              <h3 className="text-xl font-black text-white mb-4 font-grunge uppercase tracking-wider">[STREET KNOWLEDGE]</h3>
+              <p className="text-gray-400 font-grunge text-sm uppercase tracking-wide leading-relaxed">
+                REAL SKATERS /// UNDERGROUND WISDOM /// AUTHENTIC ADVICE
               </p>
             </div>
           </div>

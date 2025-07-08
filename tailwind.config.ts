@@ -63,21 +63,29 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Cores personalizadas para a skate shop
-				neon: {
-					green: '#00ff41',
-					red: '#ff0040',
+				// Cores grunge/streetwear
+				grunge: {
+					orange: '#ff4500',
+					brown: '#8b4513',
+					rust: '#b7410e',
+					dirt: '#654321',
+					concrete: '#696969',
 				},
 				dark: {
 					900: '#0a0a0a',
-					800: '#1a1a1a',
-					700: '#2a2a2a',
+					800: '#141414',
+					700: '#1f1f1f',
+					600: '#2a2a2a',
 				}
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
+			},
+			fontFamily: {
+				'grunge': ['Courier New', 'monospace'],
+				'mono': ['Courier New', 'monospace'],
 			},
 			keyframes: {
 				'accordion-down': {
@@ -96,19 +104,27 @@ export default {
 						height: '0'
 					}
 				},
-				'glow': {
-					'0%, 100%': {
-						textShadow: '0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor'
+				'glitch': {
+					'0%, 100%': { transform: 'translate(0)' },
+					'20%': { transform: 'translate(-2px, 2px)' },
+					'40%': { transform: 'translate(-2px, -2px)' },
+					'60%': { transform: 'translate(2px, 2px)' },
+					'80%': { transform: 'translate(2px, -2px)' }
+				},
+				'distort': {
+					'0%, 100%': { 
+						textShadow: '2px 2px 0px rgba(0, 0, 0, 0.8), -1px -1px 0px rgba(255, 69, 0, 0.3)'
 					},
-					'50%': {
-						textShadow: '0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor'
+					'50%': { 
+						textShadow: '-2px -2px 0px rgba(0, 0, 0, 0.8), 1px 1px 0px rgba(255, 69, 0, 0.3), 0 0 5px rgba(255, 69, 0, 0.5)'
 					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				'glow': 'glow 2s ease-in-out infinite alternate'
+				'glitch': 'glitch 3s infinite',
+				'distort': 'distort 4s ease-in-out infinite'
 			}
 		}
 	},

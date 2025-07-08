@@ -1,105 +1,102 @@
 
 const Sobre = () => {
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen py-12 bg-dark-900">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Nossa <span className="text-neon-green neon-text">História</span>
+        <div className="text-center mb-16">
+          <h1 className="text-5xl md:text-6xl font-black text-white mb-6 font-grunge uppercase tracking-wider">
+            [<span className="text-grunge-orange distort-text">OUR STORY</span>]
           </h1>
-          <p className="text-xl text-gray-300">
-            Conheça a trajetória da SkateCrew e nossa paixão pelo skate
+          <p className="text-lg text-gray-300 font-grunge uppercase tracking-wide">
+            REAL STORIES FROM THE UNDERGROUND
           </p>
         </div>
 
         {/* Story Content */}
-        <div className="space-y-8">
-          <div className="bg-dark-800 rounded-lg p-8 border border-gray-700">
-            <h2 className="text-2xl font-bold text-neon-green mb-4">Como Tudo Começou</h2>
-            <p className="text-gray-300 leading-relaxed mb-4">
-              A SkateCrew nasceu em 2018 do sonho de três amigos skatistas que queriam 
-              democratizar o acesso aos melhores equipamentos de skate da cidade. 
-              Cansados de ter que viajar para encontrar produtos de qualidade, 
-              decidimos abrir nossa própria loja.
+        <div className="space-y-12">
+          <div className="streetwear-card p-10 relative">
+            <h2 className="text-3xl font-black text-grunge-orange mb-6 font-grunge uppercase tracking-wider">[THE BEGINNING]</h2>
+            <p className="text-gray-300 leading-relaxed mb-6 font-grunge">
+              izquizita nasceu em 2018 das ruas, não de um escritório. Três skatistas locais, 
+              cansados da falta de produtos autênticos na cidade, decidiram criar algo real. 
+              Começamos vendendo no próprio spot onde andávamos.
             </p>
-            <p className="text-gray-300 leading-relaxed">
-              O que começou como um pequeno espaço de 30m² no centro da cidade, 
-              hoje se tornou referência na região, atendendo skatistas iniciantes 
-              e profissionais com a mesma dedicação e carinho.
-            </p>
-          </div>
-
-          <div className="bg-dark-800 rounded-lg p-8 border border-gray-700">
-            <h2 className="text-2xl font-bold text-neon-green mb-4">Nossa Missão</h2>
-            <p className="text-gray-300 leading-relaxed">
-              Fornecer equipamentos de alta qualidade e suporte especializado para 
-              toda a comunidade skatista, desde iniciantes até profissionais. 
-              Acreditamos que o skate é mais que um esporte - é um estilo de vida, 
-              uma forma de expressão e uma comunidade unida pela paixão pelas quatro rodas.
+            <p className="text-gray-300 leading-relaxed font-grunge">
+              O que era uma mesa dobrável no centro virou referência underground. 
+              Sem marketing fake, sem patrocínio corporativo - só produtos testados 
+              por quem realmente anda de skate.
             </p>
           </div>
 
-          <div className="bg-dark-800 rounded-lg p-8 border border-gray-700">
-            <h2 className="text-2xl font-bold text-neon-green mb-4">Nossos Valores</h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <h3 className="text-lg font-semibold text-white mb-2">🛹 Qualidade</h3>
-                <p className="text-gray-400 text-sm">
-                  Trabalhamos apenas com marcas reconhecidas e testadas pela comunidade skatista.
+          <div className="streetwear-card p-10 relative">
+            <h2 className="text-3xl font-black text-grunge-orange mb-6 font-grunge uppercase tracking-wider">[THE MISSION]</h2>
+            <p className="text-gray-300 leading-relaxed font-grunge">
+              Nossa missão é simples: manter a cultura skatista real. Fornecemos gear 
+              autêntico para quem vive de verdade essa vida. Não vendemos sonhos, 
+              vendemos equipamentos que funcionam nas ruas, testados por locais.
+            </p>
+          </div>
+
+          <div className="streetwear-card p-10 relative">
+            <h2 className="text-3xl font-black text-grunge-orange mb-6 font-grunge uppercase tracking-wider">[OUR VALUES]</h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="border-l-4 border-grunge-orange pl-6">
+                <h3 className="text-lg font-black text-white mb-3 font-grunge uppercase tracking-wider">◾ AUTHENTICITY</h3>
+                <p className="text-gray-400 text-sm font-grunge uppercase tracking-wide">
+                  Only brands that earn respect on the streets.
                 </p>
               </div>
-              <div>
-                <h3 className="text-lg font-semibold text-white mb-2">🤝 Comunidade</h3>
-                <p className="text-gray-400 text-sm">
-                  Apoiamos eventos locais e incentivamos o crescimento da cena skatista.
+              <div className="border-l-4 border-grunge-orange pl-6">
+                <h3 className="text-lg font-black text-white mb-3 font-grunge uppercase tracking-wider">◾ COMMUNITY</h3>
+                <p className="text-gray-400 text-sm font-grunge uppercase tracking-wide">
+                  Supporting local skaters and underground events.
                 </p>
               </div>
-              <div>
-                <h3 className="text-lg font-semibold text-white mb-2">💡 Inovação</h3>
-                <p className="text-gray-400 text-sm">
-                  Sempre em busca das últimas tendências e tecnologias do mundo do skate.
+              <div className="border-l-4 border-grunge-orange pl-6">
+                <h3 className="text-lg font-black text-white mb-3 font-grunge uppercase tracking-wider">◾ QUALITY</h3>
+                <p className="text-gray-400 text-sm font-grunge uppercase tracking-wide">
+                  Gear that survives the streets and real sessions.
                 </p>
               </div>
-              <div>
-                <h3 className="text-lg font-semibold text-white mb-2">❤️ Paixão</h3>
-                <p className="text-gray-400 text-sm">
-                  Nossa equipe é formada por skatistas que vivem e respiram a cultura skate.
+              <div className="border-l-4 border-grunge-orange pl-6">
+                <h3 className="text-lg font-black text-white mb-3 font-grunge uppercase tracking-wider">◾ UNDERGROUND</h3>
+                <p className="text-gray-400 text-sm font-grunge uppercase tracking-wide">
+                  Staying true to the raw essence of skate culture.
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="bg-dark-800 rounded-lg p-8 border border-gray-700">
-            <h2 className="text-2xl font-bold text-neon-green mb-4">A Equipe</h2>
-            <p className="text-gray-300 leading-relaxed mb-4">
-              Nossa equipe é formada por skatistas experientes que conhecem cada 
-              produto que vendemos. Todos nós andamos de skate regularmente e 
-              testamos pessoalmente os equipamentos antes de colocá-los à venda.
+          <div className="streetwear-card p-10 relative">
+            <h2 className="text-3xl font-black text-grunge-orange mb-6 font-grunge uppercase tracking-wider">[THE CREW]</h2>
+            <p className="text-gray-300 leading-relaxed mb-6 font-grunge">
+              Nossa equipe não é funcionário, é família. Todos nós vivemos essa cultura 
+              24/7. Andamos, quebramos, testamos e aprovamos tudo que vendemos. 
+              Cada produto passa pelo crivo de quem realmente entende de street.
             </p>
-            <p className="text-gray-300 leading-relaxed">
-              Seja você um iniciante procurando seu primeiro skate ou um veterano 
-              em busca de um upgrade, nossa equipe está aqui para te orientar e 
-              garantir que você encontre exatamente o que precisa.
+            <p className="text-gray-300 leading-relaxed font-grunge">
+              Seja você iniciante ou veterano, tratamos todos igual. Aqui não tem 
+              discriminação - se você curte skate de verdade, você é bem-vindo. 
+              Nossa vibe é ensinar, não julgar.
             </p>
           </div>
         </div>
 
         {/* Call to Action */}
-        <div className="text-center mt-12 p-8 bg-gradient-to-r from-dark-800 to-dark-700 rounded-lg border border-neon-green">
-          <h3 className="text-2xl font-bold text-white mb-4">
-            Faça Parte da Nossa Comunidade
+        <div className="text-center mt-16 p-12 grunge-bg border-2 border-grunge-orange relative">
+          <h3 className="text-3xl font-black text-white mb-6 font-grunge uppercase tracking-wider">
+            [JOIN THE UNDERGROUND]
           </h3>
-          <p className="text-gray-300 mb-6">
-            Visite nossa loja, conheça nossa equipe e descubra por que somos 
-            a referência em skate da região!
+          <p className="text-gray-300 mb-8 font-grunge uppercase tracking-wide text-sm leading-relaxed">
+            VISIT OUR SPOT /// MEET THE CREW /// BE PART OF REAL STREET CULTURE
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-neon-green text-black px-8 py-3 rounded-lg font-semibold hover:bg-white transition-colors duration-300">
-              Visite Nossa Loja
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <button className="bg-grunge-orange text-black px-12 py-4 font-black font-grunge uppercase tracking-widest hover:bg-white transition-all duration-300 border-2 border-grunge-orange">
+              [VISIT SHOP]
             </button>
-            <button className="border-2 border-neon-green text-neon-green px-8 py-3 rounded-lg font-semibold hover:bg-neon-green hover:text-black transition-all duration-300">
-              Siga no Instagram
+            <button className="border-2 border-grunge-orange text-grunge-orange px-12 py-4 font-black font-grunge uppercase tracking-widest hover:bg-grunge-orange hover:text-black transition-all duration-300">
+              [FOLLOW IG]
             </button>
           </div>
         </div>
