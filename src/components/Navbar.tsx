@@ -14,15 +14,14 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-black border-b-2 border-grunge-orange sticky top-0 z-50 shadow-lg">
+    <nav className="bg-black border-b border-gray-800 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="text-3xl font-black font-grunge">
-              <span className="text-white">[</span>
-              <span className="grunge-text distort-text">izquizita</span>
-              <span className="text-white">]</span>
+            <div className="text-2xl font-bold">
+              <span className="text-white">Skate</span>
+              <span className="text-neon-green neon-text">Crew</span>
             </div>
           </Link>
 
@@ -33,10 +32,10 @@ const Navbar = () => {
                 <Link
                   key={item.name}
                   to={item.path}
-                  className={`px-4 py-2 text-sm font-bold font-grunge uppercase tracking-widest transition-all duration-300 border-2 border-transparent hover:border-grunge-orange hover:bg-grunge-orange hover:text-black ${
+                  className={`px-3 py-2 text-sm font-medium transition-all duration-300 hover:text-neon-green ${
                     isActive(item.path)
-                      ? 'text-grunge-orange border-grunge-orange bg-dark-800'
-                      : 'text-white hover:glitch-effect'
+                      ? 'text-neon-green border-b-2 border-neon-green'
+                      : 'text-white hover:border-b-2 hover:border-neon-green'
                   }`}
                 >
                   {item.name}
@@ -47,9 +46,9 @@ const Navbar = () => {
 
           {/* Mobile menu button */}
           <div className="md:hidden">
-            <button className="text-white hover:text-grunge-orange transition-colors duration-300 p-2 border-2 border-grunge-orange">
+            <button className="text-white hover:text-neon-green transition-colors duration-300">
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M4 6h16M4 12h16M4 18h16" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
           </div>

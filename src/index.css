@@ -3,7 +3,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Design system grunge/streetwear - cores em HSL */
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
 
 @layer base {
   :root {
@@ -54,74 +56,18 @@
   }
 
   body {
-    @apply bg-background text-foreground font-mono;
-    background: 
-      radial-gradient(circle at 20% 50%, hsla(0, 0%, 5%, 0.8) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, hsla(0, 0%, 8%, 0.9) 0%, transparent 50%),
-      linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 50%, #0a0a0a 100%);
+    @apply bg-background text-foreground font-sans;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
     min-height: 100vh;
-    font-feature-settings: 'liga', 'kern';
   }
 }
 
 @layer components {
-  .grunge-text {
-    @apply text-grunge-orange font-black tracking-wider uppercase;
-    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8), 
-                 -1px -1px 0px rgba(255, 69, 0, 0.3);
-    font-family: 'Courier New', monospace;
+  .neon-text {
+    @apply text-neon-green animate-glow;
   }
   
-  .grunge-border {
-    box-shadow: 
-      0 0 0 2px #ff4500,
-      0 0 10px rgba(255, 69, 0, 0.3),
-      inset 0 0 10px rgba(0, 0, 0, 0.5);
+  .neon-border {
+    box-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41, 0 0 15px #00ff41;
   }
-
-  .grunge-bg {
-    background: linear-gradient(45deg, 
-      rgba(255, 69, 0, 0.1) 0%, 
-      rgba(139, 69, 19, 0.1) 50%, 
-      rgba(0, 0, 0, 0.8) 100%);
-  }
-
-  .streetwear-card {
-    background: linear-gradient(135deg, 
-      rgba(20, 20, 20, 0.9) 0%, 
-      rgba(40, 40, 40, 0.8) 100%);
-    border: 1px solid rgba(255, 69, 0, 0.3);
-    box-shadow: 
-      0 4px 15px rgba(0, 0, 0, 0.6),
-      inset 0 1px 0 rgba(255, 69, 0, 0.1);
-  }
-}
-
-/* Animações grunge */
-@keyframes glitch {
-  0%, 100% { transform: translate(0); }
-  20% { transform: translate(-2px, 2px); }
-  40% { transform: translate(-2px, -2px); }
-  60% { transform: translate(2px, 2px); }
-  80% { transform: translate(2px, -2px); }
-}
-
-@keyframes distort {
-  0%, 100% { 
-    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8), 
-                 -1px -1px 0px rgba(255, 69, 0, 0.3);
-  }
-  50% { 
-    text-shadow: -2px -2px 0px rgba(0, 0, 0, 0.8), 
-                 1px 1px 0px rgba(255, 69, 0, 0.3),
-                 0 0 5px rgba(255, 69, 0, 0.5);
-  }
-}
-
-.glitch-effect {
-  animation: glitch 3s infinite;
-}
-
-.distort-text {
-  animation: distort 4s ease-in-out infinite;
 }
