@@ -9,7 +9,7 @@ const Sobre = () => {
             Nossa <span className="text-neon-green neon-text">História</span>
           </h1>
           <p className="text-xl text-gray-300">
-            Conheça a trajetória da SkateCrew e nossa paixão pelo skate
+            Conheça a trajetória da Izquizita e nossa paixão pelo skate
           </p>
         </div>
 
@@ -18,7 +18,7 @@ const Sobre = () => {
           <div className="bg-dark-800 rounded-lg p-8 border border-gray-700">
             <h2 className="text-2xl font-bold text-neon-green mb-4">Como Tudo Começou</h2>
             <p className="text-gray-300 leading-relaxed mb-4">
-              A SkateCrew nasceu em 2018 do sonho de três amigos skatistas que queriam 
+              A Izquizita nasceu em 2018 do sonho de três amigos skatistas que queriam 
               democratizar o acesso aos melhores equipamentos de skate da cidade. 
               Cansados de ter que viajar para encontrar produtos de qualidade, 
               decidimos abrir nossa própria loja.

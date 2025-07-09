@@ -20,8 +20,8 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <div className="text-2xl font-bold">
-              <span className="text-white">Skate</span>
-              <span className="text-neon-green neon-text">Crew</span>
+              <span className="text-neon-green neon-text">Izquizita</span>
+              <span className="text-white">Skateshop</span>
             </div>
           </Link>
 

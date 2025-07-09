@@ -6,8 +6,8 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
             <div className="text-xl font-bold">
-              <span className="text-white">Skate</span>
-              <span className="text-neon-green">Crew</span>
+              <span className="text-neon-green">Izquizita</span>
+              <span className="text-white">Skateshop</span>
             </div>
             <p className="text-gray-400 text-sm mt-1">
               A melhor loja de skate da cidade
@@ -16,7 +16,7 @@ const Footer = () => {
           
           <div className="text-center md:text-right">
             <p className="text-gray-400 text-sm">
-              © 2024 SkateCrew. Todos os direitos reservados.
+              © 2024 Izquizita Skateshop. Todos os direitos reservados.
             </p>
             <p className="text-gray-500 text-xs mt-1">
               Feito com ❤️ para a comunidade skatista

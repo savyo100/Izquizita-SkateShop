@@ -9,7 +9,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl md:text-7xl font-bold mb-6">
             <span className="text-white">Bem-vindo à </span>
-            <span className="text-neon-green neon-text">SkateCrew</span>
+            <span className="text-neon-green neon-text">Izquizita Skateshop</span>
           </h1>
           
           <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
@@ -39,7 +39,7 @@ const Home = () => {
       <section className="py-16 bg-dark-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-12">
-            Por que escolher a <span className="text-neon-green">SkateCrew</span>?
+            Por que escolher a <span className="text-neon-green">Izquizita Skateshop</span>?
           </h2>
           
           <div className="grid md:grid-cols-3 gap-8">

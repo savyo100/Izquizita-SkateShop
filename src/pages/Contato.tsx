@@ -1,7 +1,7 @@
 
 const Contato = () => {
-  const whatsappNumber = "5511999999999"; // Número fictício para exemplo
-  const whatsappMessage = "Olá! Vim através do site da SkateCrew e gostaria de mais informações.";
+  const whatsappNumber = "5586999309346"; // Número fictício para exemplo
+  const whatsappMessage = "Olá! Vim através do site da Izquizita e gostaria de mais informações.";
 
   const handleWhatsAppClick = () => {
     const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
@@ -54,18 +54,18 @@ const Contato = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold text-white mb-3">Visite Nossa Loja</h3>
-              <p className="text-gray-400 mb-6">
-                Venha conhecer nossa loja física! Experimente os produtos, 
-                converse com nossa equipe e faça parte da comunidade SkateCrew.
-              </p>
-              <div className="text-sm text-gray-300 mb-4">
-                <p>📍 Rua do Skate, 123 - Centro</p>
-                <p>🕒 Seg-Sex: 9h-18h | Sáb: 9h-17h</p>
-                <p>📞 (11) 99999-9999</p>
-              </div>
-            </div>
-          </div>
+{/*              <h3 className="text-xl font-bold text-white mb-3">Visite Nossa Loja</h3> */}
+{/*             <p className="text-gray-400 mb-6"> */}
+{/*                Venha conhecer nossa loja física! Experimente os produtos, */}
+{/*                converse com nossa equipe e faça parte da comunidade Izquizita.*/}
+{/*              </p>*/}
+{/*              <div className="text-sm text-gray-300 mb-4">*/}
+{/*              <p>📍 Avenida Tomaz Rebelo, 123 - Centro</p>*/}
+{/*               <p>🕒 Seg-Sex: 9h-18h | Sáb: 9h-12h</p>*/}
+{/*                <p>📞 (86) 999309346</p> */}
+{/*              </div>*/}
+           </div>
+          </div>*
         </div>
 
         {/* Additional Contact Methods */}
@@ -78,19 +78,19 @@ const Contato = () => {
             <div className="p-4">
               <div className="text-3xl mb-3">📧</div>
               <h4 className="font-semibold text-white mb-2">E-mail</h4>
-              <p className="text-gray-400 text-sm">contato@skatecrew.com.br</p>
+              <p className="text-gray-400 text-sm">contato@Izquizita.com.br</p>
             </div>
             
             <div className="p-4">
               <div className="text-3xl mb-3">📱</div>
               <h4 className="font-semibold text-white mb-2">Instagram</h4>
-              <p className="text-gray-400 text-sm">@skatecrew_oficial</p>
+              <p className="text-gray-400 text-sm">@Izquizita_oficial</p>
             </div>
             
             <div className="p-4">
               <div className="text-3xl mb-3">📍</div>
               <h4 className="font-semibold text-white mb-2">Endereço</h4>
-              <p className="text-gray-400 text-sm">Rua do Skate, 123<br />Centro - São Paulo</p>
+              <p className="text-gray-400 text-sm">Indisponível no momento<br /></p>
             </div>
           </div>
         </div>
