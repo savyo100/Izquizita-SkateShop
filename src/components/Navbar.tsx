@@ -1,8 +1,9 @@
-
 import { Link, useLocation } from 'react-router-dom';
+import { useCarrinho } from '../hooks/use-carrinho';
 
 const Navbar = () => {
   const location = useLocation();
+  const { carrinho } = useCarrinho();
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -11,6 +12,7 @@ const Navbar = () => {
     { name: 'Produtos', path: '/produtos' },
     { name: 'Sobre', path: '/sobre' },
     { name: 'Contato', path: '/contato' },
+    { name: 'Carrinho', path: '/carrinho' },
   ];
 
   return (
@@ -28,19 +30,30 @@ const Navbar = () => {
           {/* Navigation Links */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
-              {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.path}
-                  className={`px-3 py-2 text-sm font-medium transition-all duration-300 hover:text-neon-green ${
-                    isActive(item.path)
-                      ? 'text-neon-green border-b-2 border-neon-green'
-                      : 'text-white hover:border-b-2 hover:border-neon-green'
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              ))}
+              {navItems.map((item) => {
+                const isCarrinho = item.name === 'Carrinho';
+                const itemCount = carrinho.length;
+
+                return (
+                  <Link
+                    key={item.name}
+                    to={item.path}
+                    className={`relative px-3 py-2 text-sm font-medium transition-all duration-300 hover:text-neon-green ${
+                      isActive(item.path)
+                        ? 'text-neon-green border-b-2 border-neon-green'
+                        : 'text-white hover:border-b-2 hover:border-neon-green'
+                    }`}
+                  >
+                    {item.name}
+
+                    {isCarrinho && itemCount > 0 && (
+                      <span className="absolute -top-2 -right-2 bg-neon-green text-black text-xs font-bold px-2 py-0.5 rounded-full shadow-lg">
+                        {itemCount}
+                      </span>
+                    )}
+                  </Link>
+                );
+              })}
             </div>
           </div>
 

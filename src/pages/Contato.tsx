@@ -105,14 +105,14 @@ const Contato = () => {
             <div className="border-b border-gray-600 pb-4">
               <h4 className="font-semibold text-white mb-2">🕒 Qual o horário de funcionamento?</h4>
               <p className="text-gray-400 text-sm">
-                Segunda à sexta: 9h às 18h | Sábado: 9h às 17h | Domingo: Fechado
+                Segunda à sexta: 9h às 18h | Sábado: 9h às 12h | Domingo: Fechado
               </p>
             </div>
             
             <div className="border-b border-gray-600 pb-4">
               <h4 className="font-semibold text-white mb-2">🚚 Vocês fazem entrega?</h4>
               <p className="text-gray-400 text-sm">
-                Sim! Fazemos entrega na região metropolitana. Entre em contato para mais informações.
+                Sim! Fazemos entrega na região. Entre em contato para mais informações.
               </p>
             </div>
             
