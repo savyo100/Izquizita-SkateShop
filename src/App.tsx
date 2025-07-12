@@ -1,7 +1,4 @@
-
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
+// src/App.tsx
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -10,16 +7,17 @@ import Home from "./pages/Home";
 import Produtos from "./pages/Produtos";
 import Sobre from "./pages/Sobre";
 import Contato from "./pages/Contato";
-import Carrinho from './pages/Carrinho';
-import Dashboard from './pages/Dashboard';
+import Carrinho from "./pages/Carrinho";
+import Dashboard from "./pages/Dashboard";
+import LoginPage from "./pages/Login";
+import PrivateRoute from "./components/PrivateRoute";
+import { AuthProvider } from "./context/AuthContext"; // 👈 Importa o contexto
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
+    <AuthProvider> {/* 👈 Aplica o contexto de autenticação */}
       <BrowserRouter>
         <div className="min-h-screen flex flex-col">
           <Navbar />
@@ -30,13 +28,23 @@ const App = () => (
               <Route path="/sobre" element={<Sobre />} />
               <Route path="/contato" element={<Contato />} />
               <Route path="/carrinho" element={<Carrinho />} />
-              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/login" element={<LoginPage />} />
+
+              {/* Dashboard só para admin */}
+              <Route
+                path="/dashboard"
+                element={
+                  <PrivateRoute adminOnly={true}>
+                    <Dashboard />
+                  </PrivateRoute>
+                }
+              />
             </Routes>
           </main>
           <Footer />
         </div>
       </BrowserRouter>
-    </TooltipProvider>
+    </AuthProvider>
   </QueryClientProvider>
 );
 

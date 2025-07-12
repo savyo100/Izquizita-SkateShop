@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
-import CardProduto from '../components/CardProduto';
+import { useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase";
+import CardProduto from "../components/CardProduto";
 
 type Produto = {
-  id: number;
+  id: string;
   nome: string;
   preco: number;
   imagem?: string;
@@ -14,31 +16,35 @@ export default function Produtos() {
   const [carregando, setCarregando] = useState(true);
 
   useEffect(() => {
-    const fetchProdutos = async () => {
+    const carregarProdutos = async () => {
       try {
-        const resposta = await fetch('http://localhost:3001/produtos');
-        const dados = await resposta.json();
-        setProdutos(dados);
-      } catch (erro) {
-        console.error('Erro ao buscar produtos:', erro);
+        const querySnapshot = await getDocs(collection(db, "produtos"));
+        const lista = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as Produto[];
+
+        setProdutos(lista);
+      } catch (err) {
+        console.error("Erro ao carregar produtos:", err);
       } finally {
         setCarregando(false);
       }
     };
 
-    fetchProdutos();
+    carregarProdutos();
   }, []);
 
-  if (carregando) return <p className="text-center text-white">Carregando produtos...</p>;
+  if (carregando) return <p className="text-white p-4">Carregando produtos...</p>;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-6">
-      {produtos.map(produto => (
+    <div className="max-w-7xl mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+      {produtos.map((produto) => (
         <CardProduto
           key={produto.id}
           nome={produto.nome}
           preco={produto.preco}
-          imagem={produto.imagem || ''}
+          imagem={produto.imagem}
           descricao={produto.descricao}
         />
       ))}

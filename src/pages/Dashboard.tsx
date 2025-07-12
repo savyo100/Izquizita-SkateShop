@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "firebase/firestore";
+import { db } from "../firebase";
 import FormProduto from "../components/ProdutoForm";
 import CardProduto from "../components/CardProduto";
 
 type Produto = {
-  id: number;
+  id?: string;  // agora string, porque Firestore usa IDs string
   nome: string;
   preco: number;
   imagem?: string;
@@ -21,10 +23,12 @@ export default function Dashboard() {
     setCarregando(true);
     setErro(null);
     try {
-      const res = await fetch("http://localhost:3001/produtos");
-      if (!res.ok) throw new Error(`Erro ao carregar: ${res.statusText}`);
-      const data = await res.json();
-      setProdutos(data);
+      const querySnapshot = await getDocs(collection(db, "produtos"));
+      const listaProdutos = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as Produto[];
+      setProdutos(listaProdutos);
     } catch (err: any) {
       setErro(err.message || "Erro desconhecido");
     } finally {
@@ -43,15 +47,13 @@ export default function Dashboard() {
     setTimeout(() => setMensagem(null), 3000);
   };
 
-  const handleExcluir = async (id: number) => {
+  const handleExcluir = async (id?: string) => {
+    if (!id) return;
     if (!confirm("Confirma exclusão do produto?")) return;
     setErro(null);
     setMensagem(null);
     try {
-      const res = await fetch(`http://localhost:3001/produtos/${id}`, {
-        method: "DELETE",
-      });
-      if (!res.ok) throw new Error(`Erro ao excluir: ${res.statusText}`);
+      await deleteDoc(doc(db, "produtos", id));
       setMensagem("Produto excluído!");
       carregarProdutos();
       setTimeout(() => setMensagem(null), 3000);
@@ -65,7 +67,6 @@ export default function Dashboard() {
     <div className="max-w-7xl mx-auto p-8">
       <h1 className="text-4xl mb-8 text-white">Dashboard de Produtos</h1>
 
-      {/* Mensagens */}
       {mensagem && (
         <div className="mb-4 p-3 bg-green-600 text-white rounded">{mensagem}</div>
       )}
@@ -73,7 +74,6 @@ export default function Dashboard() {
         <div className="mb-4 p-3 bg-red-600 text-white rounded">{erro}</div>
       )}
 
-      {/* Formulário */}
       <div className="mb-12">
         <FormProduto produto={produtoEditando || undefined} onSuccess={handleSucesso} />
         {produtoEditando && (
@@ -86,7 +86,6 @@ export default function Dashboard() {
         )}
       </div>
 
-      {/* Lista de produtos */}
       {carregando ? (
         <p className="text-white">Carregando produtos...</p>
       ) : (

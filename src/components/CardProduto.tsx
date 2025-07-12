@@ -2,7 +2,7 @@ import { useCarrinho } from '../hooks/use-carrinho';
 
 interface CardProdutoProps {
   nome: string;
-  preco: number;
+  preco: number | string; // aceita string para garantir flexibilidade
   imagem: string;
   descricao?: string;
 }
@@ -10,23 +10,26 @@ interface CardProdutoProps {
 const CardProduto = ({ nome, preco, imagem, descricao }: CardProdutoProps) => {
   const { adicionarAoCarrinho } = useCarrinho();
 
+  // Converter preco para número com fallback
+  const precoNum = typeof preco === 'number' ? preco : Number(preco);
+  const precoFormatado = isNaN(precoNum) ? '0.00' : precoNum.toFixed(2);
+
   const produto = {
-    id: Math.random(), // substituirá depois com o ID real vindo dos dados
+    id: Math.random(), // substituir depois pelo ID real
     nome,
-    preco,
+    preco: precoNum,
     imagem,
     descricao,
   };
 
   return (
     <div className="bg-dark-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-105 group border border-gray-700">
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden bg-black rounded-t-lg flex justify-center items-center h-48">
         <img
           src={imagem}
           alt={nome}
-          className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+          className="max-w-full max-h-full object-contain"
         />
-        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
       </div>
 
       <div className="p-4">
@@ -42,7 +45,7 @@ const CardProduto = ({ nome, preco, imagem, descricao }: CardProdutoProps) => {
 
         <div className="flex justify-between items-center">
           <span className="text-2xl font-bold text-neon-green">
-            R$ {preco.toFixed(2)}
+            R$ {precoFormatado}
           </span>
 
           <button
