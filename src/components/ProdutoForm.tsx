@@ -1,6 +1,6 @@
 import { useState, useEffect, FormEvent } from 'react';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { storage, db } from "../firebase"; // importa storage e db
+import { storage, db, auth } from "../firebase";
 import { collection, addDoc, doc, setDoc } from "firebase/firestore";
 
 type Produto = {
@@ -55,7 +55,17 @@ export default function FormProduto({ produto, onSuccess }: FormProdutoProps) {
     setError('');
 
     try {
+      const usuarioAtual = auth.currentUser;
+      console.log("👤 Usuário autenticado:", usuarioAtual);
+
+      if (!usuarioAtual) {
+        setError("Você precisa estar logado para cadastrar ou editar produtos.");
+        setLoading(false);
+        return;
+      }
+
       let url = imagemUrl;
+
       if (imagemFile) {
         url = await uploadImagem(imagemFile);
       }
@@ -65,16 +75,9 @@ export default function FormProduto({ produto, onSuccess }: FormProdutoProps) {
         preco,
         imagem: url,
         descricao,
+        criadoEm: new Date(),
+        criadoPor: usuarioAtual.uid
       };
-
-      if (produto?.id) {
-        // Atualizar produto existente
-        const produtoRef = doc(db, 'produtos', produto.id);
-        await setDoc(produtoRef, data);
-      } else {
-        // Criar novo produto
-        await addDoc(collection(db, 'produtos'), data);
-      }
 
       onSuccess();
       setImagemFile(null);
