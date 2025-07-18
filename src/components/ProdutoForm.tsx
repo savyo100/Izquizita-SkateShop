@@ -1,6 +1,5 @@
 import { useState, useEffect, FormEvent } from 'react';
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { storage, db, auth } from "../firebase";
+import { db, auth } from "../firebase";
 import { collection, addDoc, doc, setDoc } from "firebase/firestore";
 
 type Produto = {
@@ -21,7 +20,6 @@ export default function FormProduto({ produto, onSuccess }: FormProdutoProps) {
   const [preco, setPreco] = useState(produto?.preco || 0);
   const [imagemUrl, setImagemUrl] = useState(produto?.imagem || '');
   const [descricao, setDescricao] = useState(produto?.descricao || '');
-  const [imagemFile, setImagemFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -31,66 +29,60 @@ export default function FormProduto({ produto, onSuccess }: FormProdutoProps) {
       setPreco(produto.preco || 0);
       setImagemUrl(produto.imagem || '');
       setDescricao(produto.descricao || '');
-      setImagemFile(null);
     } else {
       setNome('');
       setPreco(0);
       setImagemUrl('');
       setDescricao('');
-      setImagemFile(null);
     }
   }, [produto]);
 
-  const uploadImagem = async (file: File) => {
-    const nomeArquivo = `${Date.now()}_${file.name}`;
-    const storageRef = ref(storage, `produtos/${nomeArquivo}`);
-    await uploadBytes(storageRef, file);
-    const url = await getDownloadURL(storageRef);
-    return url;
-  };
-
   const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
+  e.preventDefault();
+  setLoading(true);
+  setError('');
 
-    try {
-      const usuarioAtual = auth.currentUser;
-      console.log("👤 Usuário autenticado:", usuarioAtual);
+  try {
+    const usuarioAtual = auth.currentUser;
 
-      if (!usuarioAtual) {
-        setError("Você precisa estar logado para cadastrar ou editar produtos.");
-        setLoading(false);
-        return;
-      }
-
-      let url = imagemUrl;
-
-      if (imagemFile) {
-        url = await uploadImagem(imagemFile);
-      }
-
-      const data = {
-        nome,
-        preco,
-        imagem: url,
-        descricao,
-        criadoEm: new Date(),
-        criadoPor: usuarioAtual.uid
-      };
-
-      onSuccess();
-      setImagemFile(null);
-      setImagemUrl('');
-      setNome('');
-      setPreco(0);
-      setDescricao('');
-    } catch (err: any) {
-      setError(err.message || 'Erro ao salvar produto');
-    } finally {
+    if (!usuarioAtual) {
+      setError("Você precisa estar logado para cadastrar ou editar produtos.");
       setLoading(false);
+      return;
     }
-  };
+
+    // Monta o objeto do produto com apenas campos válidos
+    const data: any = {
+      nome,
+      preco,
+      criadoEm: new Date(),
+      criadoPor: usuarioAtual.uid
+    };
+
+    if (imagemUrl.trim() !== "") data.imagem = imagemUrl.trim();
+    if (descricao.trim() !== "") data.descricao = descricao.trim();
+
+    // Atualiza se houver ID, senão cria novo produto
+    if (produto?.id) {
+      const docRef = doc(db, "produtos", produto.id);
+      await setDoc(docRef, data, { merge: true });
+    } else {
+      await addDoc(collection(db, "produtos"), data);
+    }
+
+    onSuccess();
+    setNome('');
+    setPreco(0);
+    setImagemUrl('');
+    setDescricao('');
+  } catch (err: any) {
+    console.error("Erro ao salvar produto:", err);
+    setError(err.message || 'Erro ao salvar produto');
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <form onSubmit={handleSubmit} className="max-w-lg mx-auto p-6 bg-dark-800 rounded-lg border border-gray-700">
@@ -124,16 +116,13 @@ export default function FormProduto({ produto, onSuccess }: FormProdutoProps) {
       </label>
 
       <label className="block mb-4">
-        <span className="text-white mb-1 block">Imagem</span>
+        <span className="text-white mb-1 block">URL da Imagem</span>
         <input
-          type="file"
-          accept="image/*"
-          onChange={e => {
-            if (e.target.files && e.target.files[0]) {
-              setImagemFile(e.target.files[0]);
-            }
-          }}
+          type="url"
+          value={imagemUrl}
+          onChange={e => setImagemUrl(e.target.value)}
           className="w-full rounded px-3 py-2 bg-dark-700 text-white"
+          placeholder="https://exemplo.com/imagem.jpg"
         />
       </label>
 

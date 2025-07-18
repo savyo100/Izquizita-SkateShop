@@ -9,16 +9,16 @@ type RequireAuthProps = {
 };
 
 export function RequireAuth({ children, adminOnly = false }: RequireAuthProps) {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const location = useLocation();
 
+  if (loading) return <p>Carregando...</p>;
+
   if (!user) {
-    // Não logado, redireciona para login
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
   if (adminOnly && user.papel !== "admin") {
-    // Logado mas não é admin, redireciona para home
     return <Navigate to="/" replace />;
   }
 
