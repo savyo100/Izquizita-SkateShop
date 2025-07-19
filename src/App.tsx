@@ -12,6 +12,8 @@ import Dashboard from "./pages/Dashboard";
 import LoginPage from "./pages/Login";
 import PrivateRoute from "./components/PrivateRoute";
 import { AuthProvider } from "./context/AuthContext"; // 👈 Importa o contexto
+import Checkout from "./pages/Checkout"; // importar no topo
+import Registrar from "./pages/Registrar";
 
 const queryClient = new QueryClient();
 
@@ -28,7 +30,9 @@ const App = () => (
               <Route path="/sobre" element={<Sobre />} />
               <Route path="/contato" element={<Contato />} />
               <Route path="/carrinho" element={<Carrinho />} />
+              <Route path="/checkout" element={<Checkout />} />
               <Route path="/login" element={<LoginPage />} />
+                <Route path="/registrar" element={<Registrar />} />
 
               {/* Dashboard só para admin */}
               <Route

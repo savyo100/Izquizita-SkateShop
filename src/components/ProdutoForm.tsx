@@ -1,7 +1,8 @@
 import { useState, useEffect, FormEvent } from 'react';
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { storage, db } from "../firebase"; // importa storage e db
+import { db } from "../firebase"; 
 import { collection, addDoc, doc, setDoc } from "firebase/firestore";
+
+type TipoProduto = "shape" | "rodas" | "truck" | "parafusos" | "acessorios" | "roupas" | "lixa";
 
 type Produto = {
   id?: string;
@@ -9,6 +10,7 @@ type Produto = {
   preco: number;
   imagem?: string;
   descricao?: string;
+  tipo: TipoProduto;  // novo campo obrigatório
 };
 
 type FormProdutoProps = {
@@ -16,12 +18,15 @@ type FormProdutoProps = {
   onSuccess: () => void;
 };
 
+const tiposProduto: TipoProduto[] = ["shape", "rodas", "truck", "parafusos", "acessorios", "roupas","lixa"];
+
 export default function FormProduto({ produto, onSuccess }: FormProdutoProps) {
   const [nome, setNome] = useState(produto?.nome || '');
   const [preco, setPreco] = useState(produto?.preco || 0);
   const [imagemUrl, setImagemUrl] = useState(produto?.imagem || '');
   const [descricao, setDescricao] = useState(produto?.descricao || '');
-  const [imagemFile, setImagemFile] = useState<File | null>(null);
+  const [tipo, setTipo] = useState<TipoProduto>(produto?.tipo || 'shape');  // estado para o tipo
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -31,23 +36,15 @@ export default function FormProduto({ produto, onSuccess }: FormProdutoProps) {
       setPreco(produto.preco || 0);
       setImagemUrl(produto.imagem || '');
       setDescricao(produto.descricao || '');
-      setImagemFile(null);
+      setTipo(produto.tipo || 'shape');
     } else {
       setNome('');
       setPreco(0);
       setImagemUrl('');
       setDescricao('');
-      setImagemFile(null);
+      setTipo('shape');
     }
   }, [produto]);
-
-  const uploadImagem = async (file: File) => {
-    const nomeArquivo = `${Date.now()}_${file.name}`;
-    const storageRef = ref(storage, `produtos/${nomeArquivo}`);
-    await uploadBytes(storageRef, file);
-    const url = await getDownloadURL(storageRef);
-    return url;
-  };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -55,33 +52,29 @@ export default function FormProduto({ produto, onSuccess }: FormProdutoProps) {
     setError('');
 
     try {
-      let url = imagemUrl;
-      if (imagemFile) {
-        url = await uploadImagem(imagemFile);
-      }
-
       const data = {
         nome,
         preco,
-        imagem: url,
+        imagem: imagemUrl,
         descricao,
+        tipo,
       };
 
       if (produto?.id) {
-        // Atualizar produto existente
         const produtoRef = doc(db, 'produtos', produto.id);
         await setDoc(produtoRef, data);
       } else {
-        // Criar novo produto
         await addDoc(collection(db, 'produtos'), data);
       }
 
       onSuccess();
-      setImagemFile(null);
-      setImagemUrl('');
+
+      // resetar campos
       setNome('');
       setPreco(0);
+      setImagemUrl('');
       setDescricao('');
+      setTipo('shape');
     } catch (err: any) {
       setError(err.message || 'Erro ao salvar produto');
     } finally {
@@ -121,26 +114,17 @@ export default function FormProduto({ produto, onSuccess }: FormProdutoProps) {
       </label>
 
       <label className="block mb-4">
-        <span className="text-white mb-1 block">Imagem</span>
+        <span className="text-white mb-1 block">URL da Imagem</span>
         <input
-          type="file"
-          accept="image/*"
-          onChange={e => {
-            if (e.target.files && e.target.files[0]) {
-              setImagemFile(e.target.files[0]);
-            }
-          }}
+          type="text"
+          value={imagemUrl}
+          onChange={e => setImagemUrl(e.target.value)}
+          placeholder="Cole a URL da imagem aqui"
           className="w-full rounded px-3 py-2 bg-dark-700 text-white"
         />
       </label>
 
-      {imagemUrl && (
-        <div className="mb-4">
-          <img src={imagemUrl} alt="Imagem do produto" className="max-h-40 object-contain" />
-        </div>
-      )}
-
-      <label className="block mb-6">
+      <label className="block mb-4">
         <span className="text-white mb-1 block">Descrição</span>
         <textarea
           value={descricao}
@@ -148,6 +132,23 @@ export default function FormProduto({ produto, onSuccess }: FormProdutoProps) {
           className="w-full rounded px-3 py-2 bg-dark-700 text-white"
           rows={4}
         />
+      </label>
+
+      {/* Campo Tipo */}
+      <label className="block mb-6">
+        <span className="text-white mb-1 block">Tipo</span>
+        <select
+          value={tipo}
+          onChange={e => setTipo(e.target.value as TipoProduto)}
+          className="w-full p-2 rounded-md bg-dark-700 text-white"
+          required
+        >
+          {tiposProduto.map((t) => (
+            <option key={t} value={t}>
+              {t.charAt(0).toUpperCase() + t.slice(1)}
+            </option>
+          ))}
+        </select>
       </label>
 
       <button
