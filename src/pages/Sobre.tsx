@@ -1,4 +1,3 @@
-
 const Sobre = () => {
   return (
     <div className="min-h-screen py-8">
@@ -18,7 +17,7 @@ const Sobre = () => {
           <div className="bg-dark-800 rounded-lg p-8 border border-gray-700">
             <h2 className="text-2xl font-bold text-neon-green mb-4">Como Tudo Começou</h2>
             <p className="text-gray-300 leading-relaxed mb-4">
-              A Izquizita nasceu em 2018 do sonho de três amigos skatistas que queriam 
+              A Izquizita nasceu em 2023 do sonho de três amigos skatistas que queriam 
               democratizar o acesso aos melhores equipamentos de skate da cidade. 
               Cansados de ter que viajar para encontrar produtos de qualidade, 
               decidimos abrir nossa própria loja.
@@ -95,12 +94,20 @@ const Sobre = () => {
             a referência em skate da região!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-neon-green text-black px-8 py-3 rounded-lg font-semibold hover:bg-white transition-colors duration-300">
+            <a
+              href="/Contato"
+              className="bg-neon-green text-black px-8 py-3 rounded-lg font-semibold hover:bg-white transition-colors duration-300"
+            >
               Visite Nossa Loja
-            </button>
-            <button className="border-2 border-neon-green text-neon-green px-8 py-3 rounded-lg font-semibold hover:bg-neon-green hover:text-black transition-all duration-300">
+            </a>
+            <a
+              href="https://www.instagram.com/izquizita/?utm_source=ig_web_button_share_sheet"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border-2 border-neon-green text-neon-green px-8 py-3 rounded-lg font-semibold hover:bg-neon-green hover:text-black transition-all duration-300"
+            >
               Siga no Instagram
-            </button>
+            </a>
           </div>
         </div>
       </div>

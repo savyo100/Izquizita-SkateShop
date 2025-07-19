@@ -1,6 +1,6 @@
 
 const Contato = () => {
-  const whatsappNumber = "5586999309346"; // Número fictício para exemplo
+  const whatsappNumber = "5586999309346"; 
   const whatsappMessage = "Olá! Vim através do site da Izquizita e gostaria de mais informações.";
 
   const handleWhatsAppClick = () => {
