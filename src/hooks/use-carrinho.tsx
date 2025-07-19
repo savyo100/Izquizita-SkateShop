@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
 export type Produto = {
-  id: number;
+  id: string;       // mudou para string
   nome: string;
   preco: number;
   imagem: string;
@@ -13,9 +13,9 @@ export type ProdutoCarrinho = Produto & { quantidade: number };
 type CarrinhoContextType = {
   carrinho: ProdutoCarrinho[];
   adicionarAoCarrinho: (produto: Produto) => void;
-  removerDoCarrinho: (id: number) => void;
-  aumentarQuantidade: (id: number) => void;
-  diminuirQuantidade: (id: number) => void;
+  removerDoCarrinho: (id: string) => void;
+  aumentarQuantidade: (id: string) => void;
+  diminuirQuantidade: (id: string) => void;
   limparCarrinho: () => void;
 };
 
@@ -40,36 +40,32 @@ export const CarrinhoProvider = ({ children }: { children: ReactNode }) => {
     setCarrinho((prev) => {
       const index = prev.findIndex((p) => p.id === produto.id);
       if (index !== -1) {
-        // Produto já existe, aumenta quantidade
         const novoCarrinho = [...prev];
         novoCarrinho[index].quantidade += 1;
         return novoCarrinho;
       } else {
-        // Produto novo, adiciona com quantidade 1
         return [...prev, { ...produto, quantidade: 1 }];
       }
     });
   };
 
-  const removerDoCarrinho = (id: number) => {
+  const removerDoCarrinho = (id: string) => {
     setCarrinho((prev) => prev.filter((p) => p.id !== id));
   };
 
-  const aumentarQuantidade = (id: number) => {
+  const aumentarQuantidade = (id: string) => {
     setCarrinho((prev) =>
       prev.map((p) => (p.id === id ? { ...p, quantidade: p.quantidade + 1 } : p))
     );
   };
 
-  const diminuirQuantidade = (id: number) => {
+  const diminuirQuantidade = (id: string) => {
     setCarrinho((prev) =>
-      prev
-        .map((p) =>
-          p.id === id
-            ? { ...p, quantidade: p.quantidade > 1 ? p.quantidade - 1 : 1 }
-            : p
-        )
-        // Se quiser remover quando quantidade chegar a zero, pode filtrar aqui
+      prev.map((p) =>
+        p.id === id
+          ? { ...p, quantidade: p.quantidade > 1 ? p.quantidade - 1 : 1 }
+          : p
+      )
     );
   };
 
