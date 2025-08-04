@@ -71,3 +71,18 @@ All colors MUST be HSL.
     box-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41, 0 0 15px #00ff41;
   }
 }
+
+
+#botaoDoMeio{
+    margin-top: -10px;
+  padding-left: 140px ;
+}
+
+#setaSkate{
+
+    width: 85px;
+  height: 80px;
+}
+html {
+  scroll-behavior: smooth;
+}

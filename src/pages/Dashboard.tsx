@@ -85,6 +85,7 @@ export default function Dashboard() {
 
   return (
     <div className="max-w-7xl mx-auto p-8">
+            <div id='topo'></div>
       <h1 className="text-4xl mb-8 text-white">Dashboard de Produtos</h1>
 
       {mensagem && (

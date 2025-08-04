@@ -8,6 +8,7 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
+      <div id='topo'></div>
       <section className="relative bg-gradient-to-r from-dark-900 via-dark-800 to-dark-900 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl md:text-7xl font-bold mb-6">
@@ -15,7 +16,7 @@ const Home = () => {
             <span className="text-neon-pink neon-text">Izquizita Skateshop</span>
           </h1>
 
-          <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+          <p  className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
             A melhor loja de skate da cidade! Aqui você encontra os melhores shapes, 
             rodas, trucks e acessórios para elevar seu skate ao próximo nível.
           </p>

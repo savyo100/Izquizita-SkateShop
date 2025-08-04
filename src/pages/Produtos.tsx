@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import CardProduto from "../components/CardProduto";
-import { Produto, TipoProduto } from "./produto";
+import { Produto, TipoProduto  } from "../components/ProdutoForm";
 
 const tiposProduto = ["todos", "shape", "rodas", "truck", "parafusos", "acessorios", "roupas"] as const;
 
@@ -48,7 +48,9 @@ export default function Produtos() {
   const produtosFiltrados = tipoFiltro === 'todos' ? produtos : produtos.filter(p => p.tipo === tipoFiltro);
 
   return (
+    
     <div className="flex flex-col md:flex-row min-h-screen bg-dark-900">
+            <div id='topo'></div>
       <aside className="bg-dark-800 border-b border-gray-700 md:border-b-0 md:border-r md:w-64 p-4 md:p-6 flex flex-col">
         <div className="flex items-center justify-between md:block">
           <h2 className="text-white text-xl font-semibold">Filtros</h2>

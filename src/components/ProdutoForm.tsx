@@ -3,9 +3,9 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage, db, auth } from "../firebase"; // importa storage e db
 import { collection, addDoc, doc, setDoc } from "firebase/firestore";
 
-type TipoProduto = "shape" | "rodas" | "truck" | "parafusos" | "acessorios" | "roupas" | "lixa";
+export type TipoProduto = "shape" | "rodas" | "truck" | "parafusos" | "acessorios" | "roupas" | "lixa";
 
-type Produto = {
+export type Produto = {
   id?: string;
   nome: string;
   preco: number;

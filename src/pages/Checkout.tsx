@@ -97,6 +97,7 @@ export default function Checkout() {
 
   return (
     <div className="max-w-lg mx-auto p-6 bg-dark-800 rounded-md text-white mt-10">
+            <div id='topo'></div>
       <h1 className="text-3xl font-bold mb-6 text-neon-green">Finalizar Pedido</h1>
 
       {erro && <p className="mb-4 text-red-500">{erro}</p>}

@@ -1,5 +1,8 @@
+import { funcaoBotao } from "./funcaoBotao";
 
 const Footer = () => {
+  const mostrarBotao = funcaoBotao();
+
   return (
     <footer className="bg-black border-t border-gray-800 mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -13,7 +16,19 @@ const Footer = () => {
               A melhor loja de skate da cidade
             </p>
           </div>
-          
+
+          {/* Botão que aparece suavemente ao fim da página */}
+          <a
+            href="#topo"
+            className={`
+              z-50 p-3 text-black shadow-lg
+              transition-opacity duration-500 ease-in-out
+              ${mostrarBotao ? 'opacity-100' : 'opacity-0 pointer-events-none'}
+            `}
+          >
+            <img src="./src/imags/setaSkate.png" alt="skate.png" id="setaSkate" />
+          </a>
+
           <div className="text-center md:text-right">
             <p className="text-gray-400 text-sm">
               © 2025 Izquizita Skateshop. Todos os direitos reservados.
