@@ -1,7 +1,6 @@
 import { useState, useEffect, FormEvent } from 'react';
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { storage, db, auth } from "../firebase"; // importa storage e db
 import { collection, addDoc, doc, setDoc } from "firebase/firestore";
+import { db, auth } from "../firebase";
 
 type TipoProduto = "shape" | "rodas" | "truck" | "parafusos" | "acessorios" | "roupas" | "lixa";
 
@@ -11,7 +10,9 @@ type Produto = {
   preco: number;
   imagem?: string;
   descricao?: string;
-  tipo: TipoProduto;  // novo campo obrigatório
+  tipo: TipoProduto;
+  criadoEm?: Date;
+  criadoPor?: string;
 };
 
 type FormProdutoProps = {
@@ -19,15 +20,14 @@ type FormProdutoProps = {
   onSuccess: () => void;
 };
 
-const tiposProduto: TipoProduto[] = ["shape", "rodas", "truck", "parafusos", "acessorios", "roupas","lixa"];
+const tiposProduto: TipoProduto[] = ["shape", "rodas", "truck", "parafusos", "acessorios", "roupas", "lixa"];
 
 export default function FormProduto({ produto, onSuccess }: FormProdutoProps) {
   const [nome, setNome] = useState(produto?.nome || '');
   const [preco, setPreco] = useState(produto?.preco || 0);
   const [imagemUrl, setImagemUrl] = useState(produto?.imagem || '');
   const [descricao, setDescricao] = useState(produto?.descricao || '');
-  const [tipo, setTipo] = useState<TipoProduto>(produto?.tipo || 'shape');  // estado para o tipo
-
+  const [tipo, setTipo] = useState<TipoProduto>(produto?.tipo || 'shape');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -54,7 +54,6 @@ export default function FormProduto({ produto, onSuccess }: FormProdutoProps) {
 
     try {
       const usuarioAtual = auth.currentUser;
-      console.log("👤 Usuário autenticado:", usuarioAtual);
 
       if (!usuarioAtual) {
         setError("Você precisa estar logado para cadastrar ou editar produtos.");
@@ -62,29 +61,36 @@ export default function FormProduto({ produto, onSuccess }: FormProdutoProps) {
         return;
       }
 
-      let url = imagemUrl;
-
-      if (imagemFile) {
-        url = await uploadImagem(imagemFile);
-      }
+      const url = imagemUrl;
 
       const data = {
         nome,
         preco,
-        imagem: imagemUrl,
+        imagem: url,
         descricao,
-        criadoEm: new Date(),
+        tipo,
+        criadoEm: produto?.id ? produto.criadoEm || new Date() : new Date(),
         criadoPor: usuarioAtual.uid
       };
 
+      if (produto?.id) {
+        const ref = doc(db, "produtos", produto.id);
+        await setDoc(ref, data, { merge: true });
+      } else {
+        await addDoc(collection(db, "produtos"), data);
+      }
+
       onSuccess();
 
-      // resetar campos
-      setNome('');
-      setPreco(0);
-      setImagemUrl('');
-      setDescricao('');
-      setTipo('shape');
+      // resetar campos após criação
+      if (!produto?.id) {
+        setNome('');
+        setPreco(0);
+        setImagemUrl('');
+        setDescricao('');
+        setTipo('shape');
+      }
+
     } catch (err: any) {
       setError(err.message || 'Erro ao salvar produto');
     } finally {
@@ -144,7 +150,6 @@ export default function FormProduto({ produto, onSuccess }: FormProdutoProps) {
         />
       </label>
 
-      {/* Campo Tipo */}
       <label className="block mb-6">
         <span className="text-white mb-1 block">Tipo</span>
         <select

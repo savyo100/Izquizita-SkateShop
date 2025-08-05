@@ -32,21 +32,21 @@ const Home = () => {
             >
               <SwiperSlide>
                 <img
-                  src="./src/imags/ima1.jpeg"
+                  src="/imags/ima1.jpeg"
                   alt="Slide 1"
                   className="w-full h-[500px] md:h-[600px] object-cover"
                 />
               </SwiperSlide>
               <SwiperSlide>
                 <img
-                  src="./src/imags/ima2.jpg"
+                  src="/imags/ima2.jpg"
                   alt="Slide 2"
                   className="w-full h-[500px] md:h-[600px] object-cover"
                 />
               </SwiperSlide>
               <SwiperSlide>
                 <img
-                  src="./src/imags/ima3.jpg"
+                  src="/imags/ima3.jpg"
                   alt="Slide 3"
                   className="w-full h-[500px] md:h-[600px] object-cover"
                 />
