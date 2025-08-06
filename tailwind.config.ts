@@ -67,6 +67,8 @@ export default {
 				neon: {
 					green: '#00ff41',
 					red: '#ff0040',
+					pink: '#ff4ec9',
+					purple: '#a64eff',
 				},
 				dark: {
 					900: '#0a0a0a',

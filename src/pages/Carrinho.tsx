@@ -53,6 +53,7 @@ export default function Carrinho() {
                     <button
                       onClick={() => diminuirQuantidade(item.id)}
                       className="bg-gray-700 hover:bg-gray-600 px-2 py-1 rounded"
+                      aria-label={`Diminuir quantidade de ${item.nome}`}
                     >
                       -
                     </button>
@@ -60,12 +61,14 @@ export default function Carrinho() {
                     <button
                       onClick={() => aumentarQuantidade(item.id)}
                       className="bg-gray-700 hover:bg-gray-600 px-2 py-1 rounded"
+                      aria-label={`Aumentar quantidade de ${item.nome}`}
                     >
                       +
                     </button>
                     <button
                       onClick={() => removerDoCarrinho(item.id)}
                       className="text-red-400 hover:text-red-200 ml-4"
+                      aria-label={`Remover ${item.nome} do carrinho`}
                     >
                       Remover
                     </button>
@@ -78,7 +81,7 @@ export default function Carrinho() {
               Total: R$ {total.toFixed(2)}
             </div>
 
-            <div className="flex justify-between">
+            <div className="flex justify-between flex-wrap gap-4">
               <button
                 onClick={limparCarrinho}
                 className="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-500 transition"
@@ -86,9 +89,12 @@ export default function Carrinho() {
                 Limpar Carrinho
               </button>
 
-              <button className="bg-neon-green text-black px-6 py-2 rounded hover:bg-white transition">
+              <Link
+                to="/checkout"
+                className="bg-neon-green text-black px-6 py-2 rounded hover:bg-white transition"
+              >
                 Finalizar Compra
-              </button>
+              </Link>
             </div>
           </>
         )}

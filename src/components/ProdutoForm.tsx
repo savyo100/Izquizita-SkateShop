@@ -1,6 +1,8 @@
 import { useState, useEffect, FormEvent } from 'react';
-import { db, auth } from "../firebase";
 import { collection, addDoc, doc, setDoc } from "firebase/firestore";
+import { db, auth } from "../firebase";
+
+type TipoProduto = "shape" | "rodas" | "truck" | "parafusos" | "acessorios" | "roupas" | "lixa";
 
 type Produto = {
   id?: string;
@@ -8,6 +10,9 @@ type Produto = {
   preco: number;
   imagem?: string;
   descricao?: string;
+  tipo: TipoProduto;
+  criadoEm?: Date;
+  criadoPor?: string;
 };
 
 type FormProdutoProps = {
@@ -15,11 +20,14 @@ type FormProdutoProps = {
   onSuccess: () => void;
 };
 
+const tiposProduto: TipoProduto[] = ["shape", "rodas", "truck", "parafusos", "acessorios", "roupas", "lixa"];
+
 export default function FormProduto({ produto, onSuccess }: FormProdutoProps) {
   const [nome, setNome] = useState(produto?.nome || '');
   const [preco, setPreco] = useState(produto?.preco || 0);
   const [imagemUrl, setImagemUrl] = useState(produto?.imagem || '');
   const [descricao, setDescricao] = useState(produto?.descricao || '');
+  const [tipo, setTipo] = useState<TipoProduto>(produto?.tipo || 'shape');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -29,11 +37,13 @@ export default function FormProduto({ produto, onSuccess }: FormProdutoProps) {
       setPreco(produto.preco || 0);
       setImagemUrl(produto.imagem || '');
       setDescricao(produto.descricao || '');
+      setTipo(produto.tipo || 'shape');
     } else {
       setNome('');
       setPreco(0);
       setImagemUrl('');
       setDescricao('');
+      setTipo('shape');
     }
   }, [produto]);
 
@@ -42,8 +52,8 @@ export default function FormProduto({ produto, onSuccess }: FormProdutoProps) {
   setLoading(true);
   setError('');
 
-  try {
-    const usuarioAtual = auth.currentUser;
+    try {
+      const usuarioAtual = auth.currentUser;
 
     if (!usuarioAtual) {
       setError("Você precisa estar logado para cadastrar ou editar produtos.");
@@ -51,38 +61,42 @@ export default function FormProduto({ produto, onSuccess }: FormProdutoProps) {
       return;
     }
 
-    // Monta o objeto do produto com apenas campos válidos
-    const data: any = {
-      nome,
-      preco,
-      criadoEm: new Date(),
-      criadoPor: usuarioAtual.uid
-    };
+      const url = imagemUrl;
 
-    if (imagemUrl.trim() !== "") data.imagem = imagemUrl.trim();
-    if (descricao.trim() !== "") data.descricao = descricao.trim();
+      const data = {
+        nome,
+        preco,
+        imagem: url,
+        descricao,
+        tipo,
+        criadoEm: produto?.id ? produto.criadoEm || new Date() : new Date(),
+        criadoPor: usuarioAtual.uid
+      };
 
-    // Atualiza se houver ID, senão cria novo produto
-    if (produto?.id) {
-      const docRef = doc(db, "produtos", produto.id);
-      await setDoc(docRef, data, { merge: true });
-    } else {
-      await addDoc(collection(db, "produtos"), data);
+      if (produto?.id) {
+        const ref = doc(db, "produtos", produto.id);
+        await setDoc(ref, data, { merge: true });
+      } else {
+        await addDoc(collection(db, "produtos"), data);
+      }
+
+      onSuccess();
+
+      // resetar campos após criação
+      if (!produto?.id) {
+        setNome('');
+        setPreco(0);
+        setImagemUrl('');
+        setDescricao('');
+        setTipo('shape');
+      }
+
+    } catch (err: any) {
+      setError(err.message || 'Erro ao salvar produto');
+    } finally {
+      setLoading(false);
     }
-
-    onSuccess();
-    setNome('');
-    setPreco(0);
-    setImagemUrl('');
-    setDescricao('');
-  } catch (err: any) {
-    console.error("Erro ao salvar produto:", err);
-    setError(err.message || 'Erro ao salvar produto');
-  } finally {
-    setLoading(false);
-  }
-};
-
+  };
 
   return (
     <form onSubmit={handleSubmit} className="max-w-lg mx-auto p-6 bg-dark-800 rounded-lg border border-gray-700">
@@ -118,21 +132,16 @@ export default function FormProduto({ produto, onSuccess }: FormProdutoProps) {
       <label className="block mb-4">
         <span className="text-white mb-1 block">URL da Imagem</span>
         <input
-          type="url"
+          type="text"
           value={imagemUrl}
           onChange={e => setImagemUrl(e.target.value)}
+          placeholder="Cole a URL da imagem aqui"
           className="w-full rounded px-3 py-2 bg-dark-700 text-white"
           placeholder="https://exemplo.com/imagem.jpg"
         />
       </label>
 
-      {imagemUrl && (
-        <div className="mb-4">
-          <img src={imagemUrl} alt="Imagem do produto" className="max-h-40 object-contain" />
-        </div>
-      )}
-
-      <label className="block mb-6">
+      <label className="block mb-4">
         <span className="text-white mb-1 block">Descrição</span>
         <textarea
           value={descricao}
@@ -140,6 +149,22 @@ export default function FormProduto({ produto, onSuccess }: FormProdutoProps) {
           className="w-full rounded px-3 py-2 bg-dark-700 text-white"
           rows={4}
         />
+      </label>
+
+      <label className="block mb-6">
+        <span className="text-white mb-1 block">Tipo</span>
+        <select
+          value={tipo}
+          onChange={e => setTipo(e.target.value as TipoProduto)}
+          className="w-full p-2 rounded-md bg-dark-700 text-white"
+          required
+        >
+          {tiposProduto.map((t) => (
+            <option key={t} value={t}>
+              {t.charAt(0).toUpperCase() + t.slice(1)}
+            </option>
+          ))}
+        </select>
       </label>
 
       <button

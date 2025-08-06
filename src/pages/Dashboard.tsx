@@ -1,15 +1,18 @@
-import { useEffect, useState } from "react";
-import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "firebase/firestore";
+import { useEffect, useState, useRef } from "react";
+import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../firebase";
 import FormProduto from "../components/ProdutoForm";
 import CardProduto from "../components/CardProduto";
 
+type TipoProduto = "shape" | "rodas" | "truck" | "parafusos" | "acessorios" | "roupas";
+
 type Produto = {
-  id?: string;  // agora string, porque Firestore usa IDs string
+  id?: string;
   nome: string;
   preco: number;
   imagem?: string;
   descricao?: string;
+  tipo: TipoProduto;
 };
 
 export default function Dashboard() {
@@ -19,15 +22,22 @@ export default function Dashboard() {
   const [mensagem, setMensagem] = useState<string | null>(null);
   const [erro, setErro] = useState<string | null>(null);
 
+  // Ref para controlar o timer de mensagem
+  const timerRef = useRef<number | null>(null);
+
   const carregarProdutos = async () => {
     setCarregando(true);
     setErro(null);
     try {
       const querySnapshot = await getDocs(collection(db, "produtos"));
-      const listaProdutos = querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data(),
-      })) as Produto[];
+      const listaProdutos = querySnapshot.docs.map(doc => {
+        const data = doc.data() as Produto;
+        return {
+          id: doc.id,
+          tipo: data.tipo || "shape", // default para tipo
+          ...data,
+        };
+      });
       setProdutos(listaProdutos);
     } catch (err: any) {
       setErro(err.message || "Erro desconhecido");
@@ -38,13 +48,23 @@ export default function Dashboard() {
 
   useEffect(() => {
     carregarProdutos();
+
+    // Limpa timer se componente desmontar
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
   }, []);
+
+  const limparMensagem = () => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = window.setTimeout(() => setMensagem(null), 3000);
+  };
 
   const handleSucesso = () => {
     setMensagem(produtoEditando ? "Produto atualizado!" : "Produto cadastrado!");
     setProdutoEditando(null);
     carregarProdutos();
-    setTimeout(() => setMensagem(null), 3000);
+    limparMensagem();
   };
 
   const handleExcluir = async (id?: string) => {
@@ -56,7 +76,7 @@ export default function Dashboard() {
       await deleteDoc(doc(db, "produtos", id));
       setMensagem("Produto excluído!");
       carregarProdutos();
-      setTimeout(() => setMensagem(null), 3000);
+      limparMensagem();
       if (produtoEditando?.id === id) setProdutoEditando(null);
     } catch (err: any) {
       setErro(err.message || "Erro desconhecido ao excluir");
@@ -94,9 +114,11 @@ export default function Dashboard() {
             <div key={p.id} className="bg-dark-700 p-4 rounded flex flex-col">
               <CardProduto
                 nome={p.nome}
+                id={p.id!}
                 preco={p.preco}
                 imagem={p.imagem || ""}
                 descricao={p.descricao}
+                tipo={p.tipo}
               />
               <div className="mt-4 flex gap-2">
                 <button
