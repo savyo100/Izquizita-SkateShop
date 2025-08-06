@@ -48,14 +48,14 @@ All colors MUST be HSL.
     --sidebar-border: 240 5.9% 90%;
     --sidebar-ring: 240 5.9% 10%;
 
-    /* Skate shop cores personalizadas */
-    --neon-green: 120 100% 50%;
-    --neon-red: 0 100% 50%;
-    --neon-pink: 320 100% 75%;
-    --neon-purple: 270 100% 70%;
-    --dark-900: 240 10% 3.9%;
-    --dark-800: 240 5% 6%;
-    --dark-700: 240 4% 9%;
+    /* Skate shop cores personalizadas - Tema Claro */
+    --neon-green: 120 80% 35%;
+    --neon-red: 0 80% 45%;
+    --neon-pink: 320 60% 50%;
+    --neon-purple: 270 60% 45%;
+    --dark-900: 210 20% 98%;
+    --dark-800: 210 15% 94%;
+    --dark-700: 210 10% 88%;
   }
 
   .dark {
@@ -95,6 +95,15 @@ All colors MUST be HSL.
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Skate shop cores personalizadas - Tema Escuro */
+    --neon-green: 120 100% 50%;
+    --neon-red: 0 100% 50%;
+    --neon-pink: 320 100% 75%;
+    --neon-purple: 270 100% 70%;
+    --dark-900: 240 10% 3.9%;
+    --dark-800: 240 5% 6%;
+    --dark-700: 240 4% 9%;
   }
 }
 
