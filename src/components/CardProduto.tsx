@@ -1,6 +1,5 @@
 import { useCarrinho } from '../hooks/use-carrinho';
-
-type TipoProduto = "shape" | "rodas" | "truck" | "parafusos" | "acessorios" | "roupas";
+import { TipoProduto } from '../types/produto';
 
 interface CardProdutoProps {
   id: string;

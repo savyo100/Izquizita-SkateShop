@@ -1,18 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import { useAuth } from "../context/AuthContext";
 
-type FormData = {
+type LoginFormData = {
   email: string;
   senha: string;
 };
-
-const schema = yup.object({
-  email: yup.string().email("Email inválido").required("Email é obrigatório"),
-  senha: yup.string().required("Senha é obrigatória"),
-}).required();
 
 export default function LoginPage() {
   const { login } = useAuth();
@@ -23,11 +16,9 @@ export default function LoginPage() {
     handleSubmit,
     formState: { errors, isSubmitting },
     setError,
-  } = useForm<FormData>({
-    resolver: yupResolver(schema),
-  });
+  } = useForm<LoginFormData>();
 
-  async function onSubmit(data: FormData) {
+  async function onSubmit(data: LoginFormData) {
     try {
       await login(data.email, data.senha);
       navigate("/dashboard");
@@ -62,7 +53,7 @@ export default function LoginPage() {
         Email
         <input
           type="email"
-          {...register("email")}
+          {...register("email", { required: "Email é obrigatório", pattern: { value: /^\S+@\S+$/i, message: "Email inválido" } })}
           className={`w-full p-3 mb-4 rounded bg-dark-700 placeholder:text-gray-400 focus:outline-none focus:ring-2 ${
             errors.email ? "focus:ring-red-500 border border-red-500" : "focus:ring-neon-green"
           }`}
@@ -75,7 +66,7 @@ export default function LoginPage() {
         Senha
         <input
           type="password"
-          {...register("senha")}
+          {...register("senha", { required: "Senha é obrigatória" })}
           className={`w-full p-3 mb-6 rounded bg-dark-700 placeholder:text-gray-400 focus:outline-none focus:ring-2 ${
             errors.senha ? "focus:ring-red-500 border border-red-500" : "focus:ring-neon-green"
           }`}

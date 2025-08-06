@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import CardProduto from "../components/CardProduto";
-import { Produto, TipoProduto } from "./produto";
+import { Produto, TipoProduto } from "../types/produto";
 
-const tiposProduto = ["todos", "shape", "rodas", "truck", "parafusos", "acessorios", "roupas"] as const;
+const tiposProduto = ["todos", "shape", "rodas", "truck", "parafusos", "acessorios", "roupas", "lixa"] as const;
 
 export default function Produtos() {
   const [produtos, setProdutos] = useState<Produto[]>([]);
@@ -25,7 +25,7 @@ export default function Produtos() {
             preco: typeof data.preco === 'number' ? data.preco : 0,
             imagem: typeof data.imagem === 'string' ? data.imagem : undefined,
             descricao: typeof data.descricao === 'string' ? data.descricao : undefined,
-            tipo: typeof data.tipo === 'string' && ["shape", "rodas", "truck", "parafusos", "acessorios", "roupas"].includes(data.tipo)
+            tipo: typeof data.tipo === 'string' && ["shape", "rodas", "truck", "parafusos", "acessorios", "roupas", "lixa"].includes(data.tipo)
               ? data.tipo as TipoProduto
               : "shape",
           } as Produto;

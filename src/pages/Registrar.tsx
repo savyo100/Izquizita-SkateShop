@@ -1,19 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 
-type FormData = {
+type RegisterFormData = {
   email: string;
   senha: string;
 };
-
-const schema = yup.object({
-  email: yup.string().email("Email inválido").required("Email é obrigatório"),
-  senha: yup.string().min(6, "Senha deve ter ao menos 6 caracteres").required("Senha é obrigatória"),
-}).required();
 
 export default function Registrar() {
   const navigate = useNavigate();
@@ -22,11 +15,9 @@ export default function Registrar() {
     handleSubmit,
     formState: { errors, isSubmitting },
     setError,
-  } = useForm<FormData>({
-    resolver: yupResolver(schema),
-  });
+  } = useForm<RegisterFormData>();
 
-  async function onSubmit(data: FormData) {
+  async function onSubmit(data: RegisterFormData) {
     try {
       await createUserWithEmailAndPassword(auth, data.email, data.senha);
       navigate("/dashboard");
@@ -56,7 +47,7 @@ export default function Registrar() {
           Email
           <input
             type="email"
-            {...register("email")}
+            {...register("email", { required: "Email é obrigatório", pattern: { value: /^\S+@\S+$/i, message: "Email inválido" } })}
             className={`w-full p-2 rounded bg-dark-700 text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 ${
               errors.email ? "focus:ring-red-500 border border-red-500" : "focus:ring-neon-green"
             }`}
@@ -69,7 +60,7 @@ export default function Registrar() {
           Senha
           <input
             type="password"
-            {...register("senha")}
+            {...register("senha", { required: "Senha é obrigatória", minLength: { value: 6, message: "Senha deve ter ao menos 6 caracteres" } })}
             className={`w-full p-2 rounded bg-dark-700 text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 ${
               errors.senha ? "focus:ring-red-500 border border-red-500" : "focus:ring-neon-green"
             }`}
