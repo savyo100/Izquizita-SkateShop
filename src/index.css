@@ -9,56 +9,6 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-
-    --primary: 240 9% 10%;
-    --primary-foreground: 0 0% 98%;
-
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 10% 3.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 11%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 240 5.9% 90%;
-    --sidebar-ring: 240 5.9% 10%;
-
-    /* Skate shop cores personalizadas - Tema Claro */
-    --neon-green: 120 80% 35%;
-    --neon-red: 0 80% 45%;
-    --neon-pink: 320 60% 50%;
-    --neon-purple: 270 60% 45%;
-    --dark-900: 210 20% 98%;
-    --dark-800: 210 15% 94%;
-    --dark-700: 210 10% 88%;
-  }
-
-  .dark {
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
 
@@ -87,6 +37,8 @@ All colors MUST be HSL.
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
 
+    --radius: 0.5rem;
+
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -95,15 +47,6 @@ All colors MUST be HSL.
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
-
-    /* Skate shop cores personalizadas - Tema Escuro */
-    --neon-green: 120 100% 50%;
-    --neon-red: 0 100% 50%;
-    --neon-pink: 320 100% 75%;
-    --neon-purple: 270 100% 70%;
-    --dark-900: 240 10% 3.9%;
-    --dark-800: 240 5% 6%;
-    --dark-700: 240 4% 9%;
   }
 }
 
@@ -114,16 +57,8 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground font-sans;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
     min-height: 100vh;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-
-  body.dark {
-    background: linear-gradient(135deg, hsl(var(--dark-900)) 0%, hsl(var(--dark-800)) 100%);
-  }
-
-  body:not(.dark) {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   }
 }
 
