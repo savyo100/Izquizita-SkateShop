@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from "react"
+import { themeService } from "../utils/theme"
 
 type Theme = "dark" | "light" | "system"
 
@@ -31,21 +32,11 @@ export function ThemeProvider({
   )
 
   useEffect(() => {
-    const root = window.document.documentElement
-
-    root.classList.remove("light", "dark")
-
-    if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches
-        ? "dark"
-        : "light"
-
-      root.classList.add(systemTheme)
-      return
-    }
-
-    root.classList.add(theme)
+    // Initialize theme service once
+    themeService.initialize()
+    
+    // Apply theme using the service
+    themeService.setTheme(theme)
   }, [theme])
 
   const value = {
