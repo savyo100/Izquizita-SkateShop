@@ -63,22 +63,18 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Cores personalizadas para a skate shop usando HSL
-				'neon-green': 'hsl(var(--neon-green))',
-				'neon-red': 'hsl(var(--neon-red))',
-				'neon-pink': 'hsl(var(--neon-pink))',
-				'neon-purple': 'hsl(var(--neon-purple))',
-				'dark-900': 'hsl(var(--dark-900))',
-				'dark-800': 'hsl(var(--dark-800))',
-				'dark-700': 'hsl(var(--dark-700))',
-				'card-bg-light': 'hsl(var(--card-bg-light))',
-				'card-bg-dark': 'hsl(var(--card-bg-dark))',
-				'text-primary-light': 'hsl(var(--text-primary-light))',
-				'text-primary-dark': 'hsl(var(--text-primary-dark))',
-				'text-secondary-light': 'hsl(var(--text-secondary-light))',
-				'text-secondary-dark': 'hsl(var(--text-secondary-dark))',
-				'border-light': 'hsl(var(--border-light))',
-				'border-dark': 'hsl(var(--border-dark))',
+				// Cores personalizadas para a skate shop
+				neon: {
+					green: '#00ff41',
+					red: '#ff0040',
+					pink: '#ff4ec9',
+					purple: '#a64eff',
+				},
+				dark: {
+					900: '#0a0a0a',
+					800: '#1a1a1a',
+					700: '#2a2a2a',
+				}
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
