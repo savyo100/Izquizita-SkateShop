@@ -1,11 +1,18 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import { useAuth } from "../context/AuthContext";
 
-type LoginFormData = {
+type FormData = {
   email: string;
   senha: string;
 };
+
+const schema = yup.object({
+  email: yup.string().email("Email inválido").required("Email é obrigatório"),
+  senha: yup.string().required("Senha é obrigatória"),
+}).required();
 
 export default function LoginPage() {
   const { login } = useAuth();
@@ -16,9 +23,11 @@ export default function LoginPage() {
     handleSubmit,
     formState: { errors, isSubmitting },
     setError,
-  } = useForm<LoginFormData>();
+  } = useForm<FormData>({
+    resolver: yupResolver(schema),
+  });
 
-  async function onSubmit(data: LoginFormData) {
+  async function onSubmit(data: FormData) {
     try {
       await login(data.email, data.senha);
       navigate("/dashboard");
@@ -45,16 +54,16 @@ export default function LoginPage() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="max-w-md mx-auto p-6 mt-24 bg-dark-800 dark:bg-dark-800 bg-white rounded-lg shadow-lg text-white dark:text-white text-gray-800"
+      className="max-w-md mx-auto p-6 mt-24 bg-dark-800 rounded-lg shadow-lg text-white"
     >
-      <h2 className="text-3xl mb-6 text-white dark:text-white text-gray-800 text-center font-bold">Bem-vindo</h2>
+      <h2 className="text-3xl mb-6 text-white text-center font-bold">Bem-vindo</h2>
 
       <label>
         Email
         <input
           type="email"
-          {...register("email", { required: "Email é obrigatório", pattern: { value: /^\S+@\S+$/i, message: "Email inválido" } })}
-          className={`w-full p-3 mb-4 rounded bg-dark-700 dark:bg-dark-700 bg-gray-100 placeholder:text-gray-400 focus:outline-none focus:ring-2 text-white dark:text-white text-gray-800 ${
+          {...register("email")}
+          className={`w-full p-3 mb-4 rounded bg-dark-700 placeholder:text-gray-400 focus:outline-none focus:ring-2 ${
             errors.email ? "focus:ring-red-500 border border-red-500" : "focus:ring-neon-green"
           }`}
           disabled={isSubmitting}
@@ -66,8 +75,8 @@ export default function LoginPage() {
         Senha
         <input
           type="password"
-          {...register("senha", { required: "Senha é obrigatória" })}
-          className={`w-full p-3 mb-6 rounded bg-dark-700 dark:bg-dark-700 bg-gray-100 placeholder:text-gray-400 focus:outline-none focus:ring-2 text-white dark:text-white text-gray-800 ${
+          {...register("senha")}
+          className={`w-full p-3 mb-6 rounded bg-dark-700 placeholder:text-gray-400 focus:outline-none focus:ring-2 ${
             errors.senha ? "focus:ring-red-500 border border-red-500" : "focus:ring-neon-green"
           }`}
           disabled={isSubmitting}
@@ -78,12 +87,12 @@ export default function LoginPage() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full bg-neon-green text-black py-3 rounded font-semibold hover:bg-white dark:hover:bg-white hover:bg-gray-100 transition-colors duration-300 disabled:opacity-50"
+        className="w-full bg-neon-green text-black py-3 rounded font-semibold hover:bg-white transition-colors duration-300 disabled:opacity-50"
       >
         {isSubmitting ? "Entrando..." : "Entrar"}
       </button>
 
-      <p className="mt-4 text-center text-gray-400 dark:text-gray-400 text-gray-600">
+      <p className="mt-4 text-center text-gray-400">
         Não tem uma conta?{" "}
         <Link to="/registrar" className="text-neon-green hover:underline">
           Registrar
