@@ -1,19 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 
-type FormData = {
+type RegisterFormData = {
   email: string;
   senha: string;
 };
-
-const schema = yup.object({
-  email: yup.string().email("Email inválido").required("Email é obrigatório"),
-  senha: yup.string().min(6, "Senha deve ter ao menos 6 caracteres").required("Senha é obrigatória"),
-}).required();
 
 export default function Registrar() {
   const navigate = useNavigate();
@@ -22,11 +15,9 @@ export default function Registrar() {
     handleSubmit,
     formState: { errors, isSubmitting },
     setError,
-  } = useForm<FormData>({
-    resolver: yupResolver(schema),
-  });
+  } = useForm<RegisterFormData>();
 
-  async function onSubmit(data: FormData) {
+  async function onSubmit(data: RegisterFormData) {
     try {
       await createUserWithEmailAndPassword(auth, data.email, data.senha);
       navigate("/dashboard");
@@ -48,7 +39,7 @@ export default function Registrar() {
   }
 
   return (
-    <div className="max-w-md mx-auto mt-20 p-6 bg-dark-800 rounded-md text-white shadow-lg">
+    <div className="max-w-md mx-auto mt-20 p-6 bg-dark-800 dark:bg-dark-800 bg-white rounded-md text-white dark:text-white text-gray-800 shadow-lg">
       <h1 className="text-3xl mb-6 text-neon-green font-bold text-center">Registrar</h1>
 
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
@@ -56,8 +47,8 @@ export default function Registrar() {
           Email
           <input
             type="email"
-            {...register("email")}
-            className={`w-full p-2 rounded bg-dark-700 text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 ${
+            {...register("email", { required: "Email é obrigatório", pattern: { value: /^\S+@\S+$/i, message: "Email inválido" } })}
+            className={`w-full p-2 rounded bg-dark-700 dark:bg-dark-700 bg-gray-100 text-white dark:text-white text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 ${
               errors.email ? "focus:ring-red-500 border border-red-500" : "focus:ring-neon-green"
             }`}
             disabled={isSubmitting}
@@ -69,8 +60,8 @@ export default function Registrar() {
           Senha
           <input
             type="password"
-            {...register("senha")}
-            className={`w-full p-2 rounded bg-dark-700 text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 ${
+            {...register("senha", { required: "Senha é obrigatória", minLength: { value: 6, message: "Senha deve ter ao menos 6 caracteres" } })}
+            className={`w-full p-2 rounded bg-dark-700 dark:bg-dark-700 bg-gray-100 text-white dark:text-white text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 ${
               errors.senha ? "focus:ring-red-500 border border-red-500" : "focus:ring-neon-green"
             }`}
             disabled={isSubmitting}
@@ -81,13 +72,13 @@ export default function Registrar() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="bg-neon-green text-black py-3 rounded font-semibold hover:bg-white transition-colors duration-300 disabled:opacity-50"
+          className="bg-neon-green text-black py-3 rounded font-semibold hover:bg-white dark:hover:bg-white hover:bg-gray-100 transition-colors duration-300 disabled:opacity-50"
         >
           {isSubmitting ? "Registrando..." : "Registrar"}
         </button>
       </form>
 
-      <p className="mt-4 text-center text-gray-400">
+      <p className="mt-4 text-center text-gray-400 dark:text-gray-400 text-gray-600">
         Já tem uma conta?{" "}
         <Link to="/login" className="text-neon-green hover:underline">
           Entrar

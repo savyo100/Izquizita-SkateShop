@@ -135,9 +135,8 @@ export default function FormProduto({ produto, onSuccess }: FormProdutoProps) {
           type="text"
           value={imagemUrl}
           onChange={e => setImagemUrl(e.target.value)}
-          placeholder="Cole a URL da imagem aqui"
-          className="w-full rounded px-3 py-2 bg-dark-700 text-white"
           placeholder="https://exemplo.com/imagem.jpg"
+          className="w-full rounded px-3 py-2 bg-dark-700 text-white"
         />
       </label>
 
