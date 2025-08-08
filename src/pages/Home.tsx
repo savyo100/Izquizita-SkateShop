@@ -2,9 +2,14 @@ import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/autoplay';
-import { Autoplay } from 'swiper/modules';
+import 'swiper/css/navigation';
+import { Autoplay, Navigation } from 'swiper/modules';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useRef } from 'react';
 
 const Home = () => {
+  const swiperRef = useRef<any>(null);
+
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
@@ -23,12 +28,13 @@ const Home = () => {
           {/* Container relativo para carrossel + botões */}
           <div className="relative max-w-6xl mx-auto px-4">
             <Swiper
-              modules={[Autoplay]}
+              ref={swiperRef}
+              modules={[Autoplay, Navigation]}
               autoplay={{ delay: 4000, disableOnInteraction: false }}
               loop={true}
               slidesPerView={1}
               spaceBetween={0}
-              className="rounded-none overflow-hidden shadow-2xl"
+              className="rounded-lg overflow-hidden shadow-2xl"
             >
               <SwiperSlide>
                 <img
@@ -53,17 +59,34 @@ const Home = () => {
               </SwiperSlide>
             </Swiper>
 
+            {/* Botões de navegação laterais */}
+            <button
+              onClick={() => swiperRef.current?.swiper?.slidePrev()}
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-background/80 hover:bg-background/95 backdrop-blur-sm text-foreground p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 group"
+              aria-label="Slide anterior"
+            >
+              <ChevronLeft className="h-6 w-6 group-hover:text-primary transition-colors" />
+            </button>
+
+            <button
+              onClick={() => swiperRef.current?.swiper?.slideNext()}
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-background/80 hover:bg-background/95 backdrop-blur-sm text-foreground p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 group"
+              aria-label="Próximo slide"
+            >
+              <ChevronRight className="h-6 w-6 group-hover:text-primary transition-colors" />
+            </button>
+
             {/* Botões fixos logo abaixo do carrossel, centralizados e com sombra */}
-            <div className="absolute left-1/2 bottom-[-60px] transform -translate-x-1/2 flex gap-6 bg-dark-900 bg-opacity-80 px-6 py-3 rounded-lg shadow-lg z-30">
+            <div className="absolute left-1/2 bottom-[-60px] transform -translate-x-1/2 flex gap-6 bg-card/90 backdrop-blur-sm px-6 py-3 rounded-lg shadow-lg z-30 border border-border">
               <Link
                 to="/produtos"
-                className="bg-neon-green text-black px-8 py-3 rounded-lg font-semibold text-lg hover:bg-green-600 dark:hover:bg-white hover:text-blackhover:shadow-lg transition-all duration-300 hover:scale-105"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 rounded-lg font-semibold text-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
               >
                 Ver Produtos
               </Link>
               <Link
                 to="/sobre"
-                className="border-2 border-neon-green text-neon-green px-8 py-3 rounded-lg font-semibold text-lg hover:bg-green-600 dark:hover:bg-white hover:text-black transition-all duration-300"
+                className="border-2 border-primary text-primary px-8 py-3 rounded-lg font-semibold text-lg hover:bg-primary hover:text-primary-foreground transition-all duration-300"
               >
                 Nossa História
               </Link>
