@@ -67,7 +67,7 @@ export default function LoginPage() {
         <input
           type="password"
           {...register("senha", { required: "Senha é obrigatória" })}
-          className={`w-full p-3 mb-6 rounded bg-dark-700 dark:bg-dark-700 bg-gray-100 placeholder:text-gray-400 focus:outline-none focus:ring-2 text-white dark:text-white text-gray-800 ${
+          className={`w-full p-3 mb-6 rounded bg-dark-700 dark:bg-dark-700 bg-gray-100 placeholder:text-gray-400 focus:outline-none focus:ring-2 text-black dark:text-white text-gray-800 ${
             errors.senha ? "focus:ring-red-500 border border-red-500" : "focus:ring-neon-green"
           }`}
           disabled={isSubmitting}

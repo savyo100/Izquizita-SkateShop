@@ -100,62 +100,62 @@ export default function FormProduto({ produto, onSuccess }: FormProdutoProps) {
 
   return (
     <form onSubmit={handleSubmit} className="max-w-lg mx-auto p-6 bg-dark-800 rounded-lg border border-gray-700">
-      <h2 className="text-2xl mb-6 text-white">{produto ? 'Editar Produto' : 'Cadastrar Produto'}</h2>
+      <h2 className="text-2xl mb-6 text-foreground">{produto ? 'Editar Produto' : 'Cadastrar Produto'}</h2>
 
       {error && <p className="text-red-500 mb-4">{error}</p>}
 
       <label className="block mb-4">
-        <span className="text-white mb-1 block">Nome</span>
+        <span className="text-foreground mb-1 block">Nome</span>
         <input
           type="text"
           value={nome}
           onChange={e => setNome(e.target.value)}
-          className="w-full rounded px-3 py-2 bg-dark-700 text-white"
+          className="w-full rounded px-3 py-2 bg-dark-700 text-foreground"
           required
           minLength={2}
         />
       </label>
 
       <label className="block mb-4">
-        <span className="text-white mb-1 block">Preço</span>
+        <span className="text-foreground mb-1 block">Preço</span>
         <input
           type="number"
           step="0.01"
           value={preco}
           onChange={e => setPreco(parseFloat(e.target.value) || 0)}
-          className="w-full rounded px-3 py-2 bg-dark-700 text-white"
+          className="w-full rounded px-3 py-2 bg-dark-700 text-foreground"
           required
           min={0}
         />
       </label>
 
       <label className="block mb-4">
-        <span className="text-white mb-1 block">URL da Imagem</span>
+        <span className="text-foreground mb-1 block">URL da Imagem</span>
         <input
           type="text"
           value={imagemUrl}
           onChange={e => setImagemUrl(e.target.value)}
           placeholder="https://exemplo.com/imagem.jpg"
-          className="w-full rounded px-3 py-2 bg-dark-700 text-white"
+          className="w-full rounded px-3 py-2 bg-dark-700 text-foreground"
         />
       </label>
 
       <label className="block mb-4">
-        <span className="text-white mb-1 block">Descrição</span>
+        <span className="text-foreground mb-1 block">Descrição</span>
         <textarea
           value={descricao}
           onChange={e => setDescricao(e.target.value)}
-          className="w-full rounded px-3 py-2 bg-dark-700 text-white"
+          className="w-full rounded px-3 py-2 bg-dark-700 text-foreground"
           rows={4}
         />
       </label>
 
       <label className="block mb-6">
-        <span className="text-white mb-1 block">Tipo</span>
+        <span className="text-foreground mb-1 block">Tipo</span>
         <select
           value={tipo}
           onChange={e => setTipo(e.target.value as TipoProduto)}
-          className="w-full p-2 rounded-md bg-dark-700 text-white"
+          className="w-full p-2 rounded-md bg-dark-700 text-foreground"
           required
         >
           {tiposProduto.map((t) => (
@@ -169,7 +169,7 @@ export default function FormProduto({ produto, onSuccess }: FormProdutoProps) {
       <button
         type="submit"
         disabled={loading}
-        className="bg-neon-green text-black px-6 py-3 rounded font-semibold hover:bg-white transition-colors duration-300"
+        className="bg-neon-green text-black px-6 py-3 rounded font-semibold hover:bg-green-600 dark:hover:bg-white  transition-colors duration-300"
       >
         {loading ? (produto ? 'Salvando...' : 'Cadastrando...') : (produto ? 'Salvar' : 'Cadastrar')}
       </button>

@@ -85,13 +85,13 @@ export default function Dashboard() {
 
   return (
     <div className="max-w-7xl mx-auto p-8">
-      <h1 className="text-4xl mb-8 text-white">Dashboard de Produtos</h1>
+      <h1 className="text-4xl mb-8 text-black dark:text-black">Dashboard de Produtos</h1>
 
       {mensagem && (
-        <div className="mb-4 p-3 bg-green-600 text-white rounded">{mensagem}</div>
+        <div className="mb-4 p-3 bg-green-600 text-foreground rounded">{mensagem}</div>
       )}
       {erro && (
-        <div className="mb-4 p-3 bg-red-600 text-white rounded">{erro}</div>
+        <div className="mb-4 p-3 bg-red-600 text-foreground rounded">{erro}</div>
       )}
 
       <div className="mb-12">
@@ -99,7 +99,7 @@ export default function Dashboard() {
         {produtoEditando && (
           <button
             onClick={() => setProdutoEditando(null)}
-            className="mt-4 text-sm text-gray-400 hover:text-gray-200"
+            className="mt-4 text-sm text-black hover:text-black"
           >
             Cancelar edição
           </button>
@@ -107,7 +107,7 @@ export default function Dashboard() {
       </div>
 
       {carregando ? (
-        <p className="text-white">Carregando produtos...</p>
+        <p className="text-foreground">Carregando produtos...</p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {produtos.map((p) => (
@@ -123,13 +123,13 @@ export default function Dashboard() {
               <div className="mt-4 flex gap-2">
                 <button
                   onClick={() => setProdutoEditando(p)}
-                  className="flex-1 bg-neon-green text-black py-2 rounded font-semibold hover:bg-white transition-colors"
+                  className="flex-1 bg-neon-green text-black py-2 rounded font-semibold hover:bg-green-600 dark:hover:bg-white  transition-colors"
                 >
                   Editar
                 </button>
                 <button
                   onClick={() => handleExcluir(p.id)}
-                  className="flex-1 bg-red-600 text-white py-2 rounded font-semibold hover:bg-red-700 transition-colors"
+                  className="flex-1 bg-red-600 text-foreground py-2 rounded font-semibold hover:bg-red-700 transition-colors"
                 >
                   Excluir
                 </button>

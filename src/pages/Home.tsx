@@ -80,7 +80,7 @@ const Home = () => {
           </h2>
 
           <div className="grid md:grid-cols-3 gap-8">
-          <div className="bg-dark-800 rounded-lg p-8 border border-gray-700 hover:border-neon-green transition-colors duration-300">
+          <div className="bg-dark-800 rounded-lg p-8 border border-gray-700 text-center">
               <div className="text-4xl mb-4">🛹</div>
               <h3 className="text-xl font-semibold text-foreground mb-3">Produtos de Qualidade</h3>
               <p className="text-foreground">
@@ -88,7 +88,7 @@ const Home = () => {
               </p>
             </div>
 
-          <div className="bg-dark-800 rounded-lg p-8 border border-gray-700 hover:border-neon-green transition-colors duration-300">
+          <div className="bg-dark-800 rounded-lg p-8 border border-gray-700 text-center">
               <div className="text-4xl mb-4">⚡</div>
               <h3 className="text-xl font-semibold text-foreground mb-3">Entrega Rápida</h3>
               <p className="text-foreground">
@@ -96,7 +96,7 @@ const Home = () => {
               </p>
             </div>
 
-          <div className="bg-dark-800 rounded-lg p-8 border border-gray-700 hover:border-neon-green transition-colors duration-300">
+          <div className="bg-dark-800 rounded-lg p-8 border border-gray-700 text-center">
               <div className="text-4xl mb-4">🤝</div>
               <h3 className="text-xl font-semibold text-foreground mb-3">Suporte Especializado</h3>
               <p className="text-foreground">

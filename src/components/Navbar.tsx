@@ -63,8 +63,7 @@ const Navbar = () => {
                   >
                     {item.name}
                     {isCarrinho && itemCount > 0 && (
-                      <span className="absolute -top-2 -right-2 bg-neon-green text-foreground
- text-xs font-bold px-2 py-0.5 rounded-full shadow-lg">
+                      <span className="absolute -top-2 -right-2 bg-neon-green text-foreground text-xs font-bold px-2 py-0.5 rounded-full shadow-lg">
                         {itemCount}
                       </span>
                     )}
@@ -97,7 +96,7 @@ const Navbar = () => {
                     logout();
                     setMobileMenuOpen(false);
                   }}
-                  className="ml-4 bg-neon-green text-foreground px-3 py-1 rounded font-semibold hover:bg-white dark:hover:bg-white hover:bg-gray-100 transition-colors"
+                  className="ml-4 bg-neon-green text-black dark: text-black px-3 py-1 rounded font-semibold hover:bg-green-600 dark:hover:bg-green hover:bg-gray-100 transition-colors"
                 >
                   Sair
                 </button>
@@ -156,8 +155,7 @@ const Navbar = () => {
                   >
                     {item.name}
                     {isCarrinho && itemCount > 0 && (
-                      <span className="ml-2 inline-block bg-neon-green text-foreground
- text-xs font-bold px-2 py-0.5 rounded-full shadow-lg">
+                      <span className="ml-2 inline-block bg-neon-green text-foreground text-xs font-bold px-2 py-0.5 rounded-full shadow-lg">
                         {itemCount}
                       </span>
                     )}
@@ -169,7 +167,7 @@ const Navbar = () => {
               {user && papel === 'admin' && (
                 <Link
                   to="/dashboard"
-                  className="block px-3 py-2 rounded-md text-base font-medium text-foreground hover:text-neon-green"
+                  className="block px-3 py-2 rounded-md text-base font-medium text-black hover:text-neon-green"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Dashboard
@@ -183,8 +181,7 @@ const Navbar = () => {
                     logout();
                     setMobileMenuOpen(false);
                   }}
-                  className="w-full text-left px-3 py-2 rounded-md bg-neon-green text-foreground
- font-semibold hover:bg-white dark:hover:bg-white hover:bg-gray-100 transition-colors"
+                  className="w-full text-left px-3 py-2 rounded-md bg-neon-green text-foreground font-semibold hover:bg-white dark:hover:bg-green-600 hover:bg-gray-100 transition-colors"
                 >
                   Sair
                 </button>

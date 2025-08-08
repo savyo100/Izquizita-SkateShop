@@ -39,7 +39,7 @@ export default function Registrar() {
   }
 
   return (
-    <div className="max-w-md mx-auto mt-20 p-6 bg-dark-800 dark:bg-dark-800 bg-white rounded-md text-white dark:text-white text-gray-800 shadow-lg">
+    <div className="max-w-md mx-auto mt-20 p-6 bg-dark-800 dark:bg-dark-800 bg-white rounded-md text-black dark:text-white text-gray-800 shadow-lg">
       <h1 className="text-3xl mb-6 text-neon-green font-bold text-center">Registrar</h1>
 
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
@@ -48,7 +48,7 @@ export default function Registrar() {
           <input
             type="email"
             {...register("email", { required: "Email é obrigatório", pattern: { value: /^\S+@\S+$/i, message: "Email inválido" } })}
-            className={`w-full p-2 rounded bg-dark-700 dark:bg-dark-700 bg-gray-100 text-white dark:text-white text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 ${
+            className={`w-full p-2 rounded bg-dark-700 dark:bg-dark-700 bg-gray-100 text-black dark:text-white text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 ${
               errors.email ? "focus:ring-red-500 border border-red-500" : "focus:ring-neon-green"
             }`}
             disabled={isSubmitting}
@@ -61,7 +61,7 @@ export default function Registrar() {
           <input
             type="password"
             {...register("senha", { required: "Senha é obrigatória", minLength: { value: 6, message: "Senha deve ter ao menos 6 caracteres" } })}
-            className={`w-full p-2 rounded bg-dark-700 dark:bg-dark-700 bg-gray-100 text-white dark:text-white text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 ${
+            className={`w-full p-2 rounded bg-dark-700 dark:bg-dark-700 bg-gray-100 text-black dark:text-white text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 ${
               errors.senha ? "focus:ring-red-500 border border-red-500" : "focus:ring-neon-green"
             }`}
             disabled={isSubmitting}
@@ -72,7 +72,7 @@ export default function Registrar() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="bg-neon-green text-black py-3 rounded font-semibold hover:bg-white dark:hover:bg-white hover:bg-gray-100 transition-colors duration-300 disabled:opacity-50"
+          className="bg-neon-green text-black py-3 rounded font-semibold hover:bg-green-600 dark:hover:bg-white hover:bg-gray-100 transition-colors duration-300 disabled:opacity-50"
         >
           {isSubmitting ? "Registrando..." : "Registrar"}
         </button>
