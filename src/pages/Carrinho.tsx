@@ -13,7 +13,7 @@ export default function Carrinho() {
   const total = carrinho.reduce((acc, item) => acc + item.preco * item.quantidade, 0);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen py-8 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-4xl font-bold mb-8 text-center text-neon-green">Seu Carrinho</h1>
 
