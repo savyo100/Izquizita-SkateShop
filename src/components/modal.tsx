@@ -20,7 +20,7 @@ export const Modal = ({ children, onClose }: ModalProps) => {
         {/* Botão de fechar */}
         <button
           onClick={onClose}
-          className="absolute top-3 right-4 text-white text-2xl font-bold hover:text-neon-green"
+          className="absolute top-3 right-4 text-foreground text-2xl font-bold hover:text-neon-green"
         >
           ×
         </button>

@@ -13,16 +13,16 @@ export default function Carrinho() {
   const total = carrinho.reduce((acc, item) => acc + item.preco * item.quantidade, 0);
 
   return (
-    <div className="min-h-screen py-8 bg-dark-900 text-white">
+    <div className="min-h-screen bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-4xl font-bold mb-8 text-center text-neon-green">Seu Carrinho</h1>
 
         {carrinho.length === 0 ? (
-          <div className="text-center text-gray-300">
+          <div className="text-center text-foreground">
             <p className="mb-4">Seu carrinho está vazio.</p>
             <Link
               to="/produtos"
-              className="bg-neon-green text-black px-6 py-3 rounded-lg font-semibold hover:bg-white transition-all duration-300"
+              className="bg-neon-green text-black px-6 py-3 rounded-lg font-semibold hover:bg-green-600 dark:hover:bg-white transition-all duration-300"
             >
               Ver Produtos
             </Link>
@@ -43,7 +43,7 @@ export default function Carrinho() {
                     />
                     <div>
                       <h2 className="text-lg font-semibold">{item.nome}</h2>
-                      <p className="text-gray-400">
+                      <p className="text-foreground">
                         R$ {item.preco.toFixed(2)} x {item.quantidade} = R${' '}
                         {(item.preco * item.quantidade).toFixed(2)}
                       </p>
@@ -84,14 +84,14 @@ export default function Carrinho() {
             <div className="flex justify-between flex-wrap gap-4">
               <button
                 onClick={limparCarrinho}
-                className="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-500 transition"
+                className="bg-red-600 text-foreground px-6 py-2 rounded hover:bg-red-500 transition"
               >
                 Limpar Carrinho
               </button>
 
               <Link
                 to="/checkout"
-                className="bg-neon-green text-black px-6 py-2 rounded hover:bg-white transition"
+                className="bg-neon-green text-black px-6 py-2 rounded hover:bg-green-600 dark:hover:bg-white transition"
               >
                 Finalizar Compra
               </Link>
