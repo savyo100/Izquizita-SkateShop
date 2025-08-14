@@ -1,4 +1,4 @@
-Projeto loja da Izquizita
+##Projeto loja da Izquizita
 
 Um e-commerce moderno desenvolvido com React, TypeScript e Firebase, oferecendo uma experiência completa de compras online com autenticação de usuários, carrinho de compras e painel administrativo.
 
@@ -126,9 +126,6 @@ O projeto pode ser facilmente deployado usando:
 4. Push para a branch (`git push origin feature/AmazingFeature`)
 5. Abra um Pull Request
 
-## 📝 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ## 🔗 Links Úteis
 
