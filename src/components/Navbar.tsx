@@ -104,21 +104,6 @@ const Navbar = () => {
                 );
               })}
 
-              {/* Dashboard admin */}
-              {user && papel === 'admin' && (
-                <Link
-                  to="/dashboard"
-                  className={`px-3 py-2 text-sm font-medium ${
-                    isActive('/dashboard')
-                      ? 'text-neon-green border-b-2 border-neon-green'
-                      : 'text-foreground hover:text-neon-green hover:border-b-2 hover:border-neon-green'
-                  }`}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Dashboard
-                </Link>
-              )}
-
               {/* Theme Toggle */}
               <ThemeToggle />
 
