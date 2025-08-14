@@ -16,7 +16,7 @@ const Contato = () => {
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             Entre em <span className="text-neon-green neon-text">Contato</span>
           </h1>
-          <p className="text-xl text-black dark:text-gray-300">
+          <p className="text-xl text-black dark:text-gray-400">
             Estamos aqui para ajudar você com tudo relacionado ao skate!
           </p>
         </div>

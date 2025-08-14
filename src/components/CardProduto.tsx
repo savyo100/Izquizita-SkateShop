@@ -26,7 +26,7 @@ const CardProduto = ({ id, nome, preco, imagem, descricao, tipo }: CardProdutoPr
         <img src={imagemValida} alt={nome} className="max-w-full max-h-full object-contain" />
       </div>
 
-      <div className="p-4">
+      <div className="p-5">
         <h3 className="text-lg font-semibold text-black dark:text-white text-gray-800 mb-1 group-hover:text-neon-green transition-colors duration-300 ">
           {nome}
         </h3>
