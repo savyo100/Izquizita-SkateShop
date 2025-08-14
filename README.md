@@ -1,4 +1,4 @@
-# E-commerce Platform
+Projeto loja da Izquizita
 
 Um e-commerce moderno desenvolvido com React, TypeScript e Firebase, oferecendo uma experiência completa de compras online com autenticação de usuários, carrinho de compras e painel administrativo.
 
