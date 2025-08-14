@@ -1,73 +1,138 @@
-# Welcome to your Lovable project
+# E-commerce Platform
 
-## Project info
+Um e-commerce moderno desenvolvido com React, TypeScript e Firebase, oferecendo uma experiência completa de compras online com autenticação de usuários, carrinho de compras e painel administrativo.
 
-**URL**: https://lovable.dev/projects/a729de1b-74ae-4657-87a9-c9c6bb94fce7
+## 🚀 Funcionalidades
 
-## How can I edit this code?
+### Para Usuários
+- **Catálogo de Produtos**: Navegação por produtos com carrossel interativo
+- **Carrinho de Compras**: Adicionar, remover e gerenciar itens
+- **Autenticação**: Sistema de login e registro
+- **Checkout**: Processo completo de finalização de compras
+- **Página de Contato**: Formulário para comunicação
+- **Tema Dark/Light**: Alternância entre temas
 
-There are several ways of editing your application.
+### Para Administradores
+- **Dashboard Administrativo**: Painel de controle com acesso restrito
+- **Gerenciamento de Produtos**: Adicionar, editar e remover produtos
+- **Avatar com Nome**: Exibição do perfil do admin na navbar
+- **Controle de Acesso**: Rotas protegidas baseadas em papel do usuário
 
-**Use Lovable**
+## 🛠️ Tecnologias Utilizadas
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/a729de1b-74ae-4657-87a9-c9c6bb94fce7) and start prompting.
+- **Frontend**: React 18, TypeScript, Vite
+- **Styling**: Tailwind CSS, shadcn/ui
+- **Autenticação**: Firebase Auth
+- **Backend**: Firebase Firestore + Supabase
+- **Roteamento**: React Router DOM
+- **Formulários**: React Hook Form + Yup
+- **Estado**: Context API + Custom Hooks
+- **UI Components**: Radix UI, Lucide React
 
-Changes made via Lovable will be committed automatically to this repo.
+## 📁 Estrutura do Projeto
 
-**Use your preferred IDE**
+```
+src/
+├── components/          # Componentes reutilizáveis
+│   ├── ui/             # Componentes base (shadcn/ui)
+│   ├── CardProduto.tsx # Card de produto
+│   ├── Navbar.tsx      # Barra de navegação
+│   ├── Footer.tsx      # Rodapé
+│   └── ...
+├── pages/              # Páginas da aplicação
+│   ├── Home.tsx        # Página inicial
+│   ├── Produtos.tsx    # Catálogo de produtos
+│   ├── Carrinho.tsx    # Carrinho de compras
+│   ├── Dashboard.tsx   # Painel administrativo
+│   └── ...
+├── hooks/              # Custom hooks
+├── context/            # Contextos React
+├── utils/              # Utilitários e helpers
+└── types/              # Definições de tipos TypeScript
+```
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 🚀 Como executar o projeto
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Pré-requisitos
+- Node.js (versão 16 ou superior)
+- npm ou yarn
 
-Follow these steps:
-
+### Instalação
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
+# Clone o repositório
 git clone <YOUR_GIT_URL>
 
-# Step 2: Navigate to the project directory.
+# Entre no diretório
 cd <YOUR_PROJECT_NAME>
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Instale as dependências
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Execute o projeto
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### Configuração do Firebase
+1. Crie um projeto no [Firebase Console](https://console.firebase.google.com/)
+2. Configure Authentication e Firestore
+3. Adicione as credenciais no arquivo `src/firebase.ts`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🔧 Scripts Disponíveis
 
-**Use GitHub Codespaces**
+- `npm run dev` - Inicia o servidor de desenvolvimento
+- `npm run build` - Cria a build de produção
+- `npm run preview` - Visualiza a build de produção
+- `npm run lint` - Executa o linter
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🌐 Deploy
 
-## What technologies are used for this project?
+O projeto pode ser facilmente deployado usando:
+- **Lovable**: Através do botão "Share → Publish"
+- **Vercel**: Conecte o repositório GitHub
+- **Netlify**: Deploy direto do repositório
+- **Firebase Hosting**: `firebase deploy`
 
-This project is built with:
+## 📋 Funcionalidades Detalhadas
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### Sistema de Autenticação
+- Login e registro de usuários
+- Diferentes níveis de acesso (usuário/admin)
+- Proteção de rotas sensíveis
+- Persistência de sessão
 
-## How can I deploy this project?
+### Gerenciamento de Produtos
+- CRUD completo de produtos
+- Upload de imagens
+- Categorização
+- Busca e filtros
 
-Simply open [Lovable](https://lovable.dev/projects/a729de1b-74ae-4657-87a9-c9c6bb94fce7) and click on Share -> Publish.
+### Carrinho de Compras
+- Adicionar/remover produtos
+- Atualizar quantidades
+- Cálculo automático de totais
+- Persistência entre sessões
 
-## Can I connect a custom domain to my Lovable project?
+### Interface Responsiva
+- Design adaptável para mobile e desktop
+- Tema claro/escuro
+- Animações e transições suaves
+- Acessibilidade
 
-Yes, you can!
+## 🤝 Contribuição
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+## 📝 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+## 🔗 Links Úteis
+
+- **Projeto Lovable**: [https://lovable.dev/projects/a729de1b-74ae-4657-87a9-c9c6bb94fce7](https://lovable.dev/projects/a729de1b-74ae-4657-87a9-c9c6bb94fce7)
+- **Documentação React**: [https://react.dev](https://react.dev)
+- **Documentação Firebase**: [https://firebase.google.com/docs](https://firebase.google.com/docs)
+- **Documentação Tailwind**: [https://tailwindcss.com](https://tailwindcss.com)
